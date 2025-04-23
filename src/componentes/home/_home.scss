@@ -1,0 +1,53 @@
+#home{
+    .swiper{
+        .swiper-slide > div{
+            & > img{
+                object-fit: cover;
+                object-position: center;
+            }
+            .overlay{
+                background: rgb(96 87 87 / 26%);
+                .user{
+                    font-family: 'Open Sans', sans-serif;
+                }
+            }
+        }
+        
+    }
+    .navigate-buttons{
+        z-index: 1;
+        button{
+            background: transparent !important;
+            svg.under{
+                position: absolute;
+                top: 0.25rem;
+                left: 0.35rem;
+                z-index: -1;
+            }
+        }
+    }
+
+
+    .main-header{
+        h1{
+            // text-shadow: 0.3rem 0.1rem 0.1rem black;
+        }
+    }
+
+    .big-card{
+        .card-title::first-letter{
+            color: $primary;
+            font-size: 2rem !important;
+        }
+    }
+
+    .small-card{
+        & > img{
+            box-shadow: 0.3rem 0.3rem white, 0.4rem 0.4rem black;
+        }
+        .card-title::first-letter{
+            color: $primary;
+            font-size: 1.25rem !important;
+        }
+    }
+}

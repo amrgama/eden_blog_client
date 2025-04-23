@@ -1,0 +1,47 @@
+header {
+ background-image: url("../../assets/images/barlog-header-bg.png");
+ background-position: center;
+ background-size: cover;
+ background-repeat: no-repeat;   
+
+ .navbar-nav{
+    .nav-item{
+        .nav-link{
+            transition: color 0.2s;
+            &:hover,
+            &.active{
+                color: $primary !important;
+            }
+
+            &::after{
+                display: none !important;
+            }
+        }
+    }
+    .user{
+        .toggler{
+            &{
+                border: none !important;
+                box-shadow: none !important;
+                outline: none !important;
+            }
+            &:focus,
+            &:focus-visible,
+            &:focus-within,
+            &.active{
+                border: none !important;
+                box-shadow: none !important;
+                outline: none !important;
+            }
+
+            &.active{
+                .vector{
+                    & > *{
+                        color: $primary !important;
+                    }
+                }
+            } 
+        }
+    }
+ }
+}

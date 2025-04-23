@@ -1,0 +1,25 @@
+.vector-edit-box {
+    .vector{
+        .overlay{
+            display: none;
+            position: absolute;
+            inset: 100% 0px 0px 0px;
+            background: linear-gradient( to top, $primary, transparent);
+            transition: inset 0.2s;
+            overflow: hidden;
+            z-index: 100;
+        }
+
+        &:has(img){
+            .overlay{
+                display: flex;   
+                align-items: center;
+                justify-content: center;     
+            }
+
+            &:hover .overlay{
+                inset: 0px;
+            }
+        }
+    }
+}

@@ -1,0 +1,23 @@
+button[type= "submit"].disabled{
+    cursor: not-allowed;
+    pointer-events: visible;
+}
+
+%box-style{
+    border-radius: 0;
+    border: 1px solid;
+    box-shadow: 3px 3px 1px;
+}
+
+.input-wrapper{
+    input:first-child{
+        @extend %box-style;
+    }
+}
+
+.textarea-wrapper{
+    textarea{
+        resize: none;
+        @extend %box-style;
+    }
+}

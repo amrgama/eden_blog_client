@@ -1,0 +1,114 @@
+.image-upload-box > div:first-child,
+.title > input{
+    border: 2px solid;
+}
+
+.image-upload-box {
+    .overlay{
+        display: none;
+        position: absolute;
+        inset: 100% 0px 0px 0px;
+        background: linear-gradient( to top, $primary, transparent);
+        transition: inset 0.2s;
+        overflow: hidden;
+        z-index: 100;
+    }
+
+    &:has(img){
+        .overlay{
+            display: flex;   
+            align-items: center;
+            justify-content: center;     
+        }
+
+        &:hover .overlay{
+            inset: 0px;
+        }
+    }
+}
+
+.editor-wrapper{
+    padding: 1rem;
+    background-color: $white;
+    border: 2px solid $dark;
+
+    .editor-toolbar{
+        border: 2px solid $dark;
+        box-shadow: 2px 2px $dark;
+    }
+}
+.quill{
+    &.error{
+        .ql-toolbar{
+            border-bottom: 2px solid $danger !important;
+
+            & *,
+            & * *,
+            & * * *{
+                color: red !important;
+                stroke: red !important;
+            }
+        }
+    }
+
+    .ql-toolbar{
+        border-bottom: 2px solid $dark !important;
+    }
+    .ql-container{
+        min-height: 100px;
+    }
+}
+
+.rdw-image-modal-btn {
+    padding: 0px !important;
+    color: black !important;
+    line-height: 2 !important;
+}
+
+aside.tags{
+    & .user-tags{
+        .body{
+            display: flex;
+            // flex-direction: column-reverse;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            transition: 0.2s;
+            
+            span.new-tag{
+                display: inline-block;
+                width: fit-content;
+                position: relative;
+                border-radius: 0.15rem;
+                transform: translateY(-500px);
+                transition: 0.2s;
+
+                .delete-btn{
+                    height: 25px;
+                    display: flex;
+                    align-items: center;
+                    padding: 0rem 0.4rem !important;
+                    position: absolute;
+                    right: 0px;
+                    bottom: 100%;
+                    transform: rotateX(90deg) scale(0.9);
+                    transform-origin: bottom;
+                    transition: transform 0.2s, z-index 0.1s;
+                    z-index: -1;
+                }
+                &:hover{
+                    border-radius: 0.15rem 0rem 0.15rem 0.15rem;
+                    .delete-btn{
+                    transform: rotateX(180deg) scale(1);
+                    z-index: 1;
+                    }
+                }  
+            }          
+        }
+    }
+}
+
+@keyframes translateY{
+    to{
+        transform: translateY(0px);
+    }
+}
