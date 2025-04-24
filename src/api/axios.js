@@ -1,6 +1,6 @@
 import axios from "axios"
-// const PASE_URL = "https://edenblogapi-production.up.railway.app";
-const PASE_URL = "http://localhost:3500";
+const PASE_URL = "https://edenblogapi-production.up.railway.app";
+// const PASE_URL = "http://localhost:3500";
 
 export default axios.create({
     baseURL: PASE_URL,
