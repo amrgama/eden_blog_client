@@ -6,7 +6,7 @@ export const getMorePosts = async({userId, query: {skip, limit}})=>{
     const response = await axios
     .get(`/post/more?userId=${userId}&&skip=${skip}&&limit=${limit}`)
     console.log("response in get more posts", response)
-    return response.data.posts;
+    return response.data;
 }
 
 export const getUserPosts = async({userName, query: {skip, limit}})=>{
@@ -14,7 +14,7 @@ export const getUserPosts = async({userName, query: {skip, limit}})=>{
     const response = await axios
     .get(`/user/${userName}/userPosts?skip=${skip}&&limit=${limit}`)
     console.log("response in getUserPosts", response)
-    return response.data.posts;
+    return response.data;
 }
 
 export const getPostsByQuery = async(query)=>{
@@ -27,7 +27,7 @@ export const getPostsByQuery = async(query)=>{
     const response = await axios
     .get(`/post`, {params: query})
     console.log("response in getPostsByQuery", response)
-    return response.data.posts;
+    return response.data;
 }
 
 export const getMyPosts = async(skip, limit)=>{
@@ -35,7 +35,7 @@ export const getMyPosts = async(skip, limit)=>{
     const response = await axiosWithInterceptors
     .get(`/user/myPosts?skip=${skip}&&limit=${limit}`)
     console.log("response in get myPosts", response)
-    return response.data.posts;
+    return response.data;
 }
 
 export default {

@@ -5,6 +5,7 @@ import {GrFacebookOption} from 'react-icons/gr'
 import { Link } from 'react-router-dom'
 import FollowingButton from '../../account/userInfo/FollowingButton'
 import FollowButton from '../../account/userInfo/FollowButton'
+import { combineWithBaseUrl } from '../../../utils/helper'
 
 
 const AuthorInfo = ({author, authUser}) => {
@@ -27,7 +28,7 @@ const AuthorInfo = ({author, authUser}) => {
                 {
                     !!author.vector &&
                     <img 
-                        src={author?.vector} 
+                        src={combineWithBaseUrl(author?.vector)} 
                         className='vector rounded-circle' alt="..."
                         style={{width: "80px", height:"80px"}} 
                     />

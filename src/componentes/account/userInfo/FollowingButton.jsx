@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { BsPersonCheckFill } from "react-icons/bs";
 import ActionButton from '../../ui-kits/buttons/ActionButton';
-import usePrivateFetch from '../../../hooks/usePrivateFetch';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectAccount, unfollow } from '../../../features/account/accountSlice';
 
 const FollowingButton = ({accountId, className}) => {
-  // const {callApi, isLoading, isSuccess, isError, errorMsg} = usePrivateFetch(`/user/${accountId}/follow`, "put");
   const {isLoading, isSuccess, isError, message, meta}= useSelector(selectAccount);
   const dispatch = useDispatch();
 

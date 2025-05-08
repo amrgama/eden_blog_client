@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import SkeletonBigCard from '../../skeletonLoading/postCards/SkeletonBigCard';
@@ -9,31 +9,33 @@ import Observed from "../../ui-kits/Observed"
 import useObserver from '../../../hooks/useObserver';
 
 const UserPosts = ({userId, posts}) => {
-  const {posts: selectedPosts, isLoading, isSuccess, isError, message, meta} = useSelector(selectPosts)
-  const allPostsRef= useRef([...posts, ...selectedPosts])
+  const {isLoading, isSuccess, isError, message, meta} = useSelector(selectPosts)
+  const allPostsRef= useRef(posts)
   const dispatch = useDispatch();
   const observedEle = useRef();
   const observer= useObserver(fetchMorePosts);
   const matches = useMediaQuery("(min-width: 576px)");
   const style= matches? {height: "300px"} : undefined;
-  const skip= useRef(4);
-  const limit= 4;
+  const skip= useRef(0);
+  const limit= 5;
 
-  if((meta?.action === "get_more_posts") && isSuccess && !!selectedPosts.length){
-    allPostsRef.current= [...allPostsRef.current, ...selectedPosts]
-    skip.current += limit;
-  }
 
-  const renderedPostCards = allPostsRef.current?.map((post, i)=>{
-    // console.log("post", post)
-    return <BigCard key={i} postData={post} style={style}/>
-  })
+  let renderedPostCards = useMemo(()=> {
+    return allPostsRef.current?.map((post, i)=>{
+      // console.log("post", post)
+      return <BigCard key={i} postData={post} style={style}/>
+    })
+  }, [allPostsRef.current?.length]);
 
-  function fetchMorePosts(){
-    if(window.innerHeight > observedEle.current.getBoundingClientRect().bottom && !!selectedPosts.length){
+  async function fetchMorePosts(){
+    if(window.innerHeight > observedEle.current?.getBoundingClientRect().bottom){
       // console.log("fetched");
       const query = {limit, skip: skip.current}
-      dispatch(getMorePosts({userId, query}))
+      const res= await dispatch(getMorePosts({userId, query}));
+      if(res?.meta?.requestStatus == "fulfilled"){
+        allPostsRef.current= [...allPostsRef.current, ...res?.payload?.posts]
+        skip.current += limit;
+      }
     }
   }
 
@@ -63,7 +65,6 @@ const UserPosts = ({userId, posts}) => {
     }
     
   }, [posts, isLoading, isSuccess, isError, message])
-  
   return (
     <section className="user-posts py-5">
         <div className="container" style={{maxWidth: "800px"}}>
@@ -74,7 +75,10 @@ const UserPosts = ({userId, posts}) => {
                 :
                   <>
                     {renderedPostCards}
-                    <Observed reference={observedEle} cb={handleLoadingPosts} />
+                    {
+                      (meta?.page == meta?.pageCount) &&
+                      <Observed reference={observedEle} cb={handleLoadingPosts} />
+                    }
                   </>
               }
             </div>

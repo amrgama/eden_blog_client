@@ -37,10 +37,10 @@ const Following = ({following}) => {
                 :
                     <div className="py-1 text-center text-muted fw-500">
                         {
-                            (!!!searchResult.length)?
-                                "There is not matched users"
-                            :
+                            (!!!searchResult.length && isEmptyQuery)?
                                 "There is no following users"
+                            :
+                                "There is not matched users"
                         }
                     </div>
             }

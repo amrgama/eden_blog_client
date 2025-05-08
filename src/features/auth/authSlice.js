@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import authServices from "./authServices";
 
 const initialState = {
-    user: JSON.parse(window.localStorage.getItem("user")) ?? {},
+    user: JSON.parse(window.localStorage.getItem("user")),
     isLoading: false,
     isSuccess: false,
     isError: false,
@@ -40,6 +40,8 @@ export const login = createAsyncThunk("auth/login",
 async(user, thunkAPI)=>{
 
     try{
+        console.log("user in login", user)
+
         const response = await authServices.login(user)
 
         console.log("response in login", response)
@@ -54,14 +56,15 @@ async(user, thunkAPI)=>{
             message = "No server response"
         }
         else if(err?.response?.status === 400){
-            message = "There is some user information missing"
+            message = "There is some user information missing";
         }
         else if(err?.response?.status === 401){
-            message = "Uncorrect email or password"
+            message = "Uncorrect email or password";
         }
         else{
             message = "Login faild"
         }
+    
         return thunkAPI.rejectWithValue(message)
     }
 })
@@ -73,7 +76,6 @@ export const logout = createAsyncThunk("auth/logout", async()=>{
     console.log("response in logout", response)
 
     window.localStorage.removeItem("user")
-    
     return response;
 })
 
@@ -82,7 +84,7 @@ const authSlice = createSlice({
     initialState,
     reducers: {
         reset: (state)=>{
-            state.user= {}
+            state.user= null
             state.isLoading = false
             state.isSuccess = false
             state.isError = false
@@ -95,18 +97,18 @@ const authSlice = createSlice({
     },
     extraReducers: (builder)=>{
         builder
-        .addCase(register.pending, (state)=>{
+        .addCase(register.pending, (state, action)=>{
             state.isLoading = true
             state.isSuccess = false
             state.isError = false
             state.message= ""
+            state.meta= {...action.meta, action: "register"}
         })
         .addCase(register.fulfilled, (state, action)=>{
             state.isLoading = false
             state.isSuccess = true
             state.isError = false
             state.message= ""
-            state.meta= {...action.meta, action: "register"}
         })
         .addCase(register.rejected, (state, action)=>{
             state.isLoading = false
@@ -114,11 +116,12 @@ const authSlice = createSlice({
             state.isError = true
             state.message= action.payload
         })
-        .addCase(login.pending, (state)=>{
+        .addCase(login.pending, (state, action)=>{
             state.isLoading = true
             state.isSuccess = false
             state.isError = false
             state.message= ""
+            state.meta= {...action.meta, action: "logIn"}
         })
         .addCase(login.fulfilled, (state, action)=>{
             state.user = action.payload
@@ -126,7 +129,6 @@ const authSlice = createSlice({
             state.isSuccess = true
             state.isError = false
             state.message= ""
-            state.meta= {...action.meta, action: "logIn"}
         })
         .addCase(login.rejected, (state, action)=>{
             state.isLoading = false
@@ -134,18 +136,25 @@ const authSlice = createSlice({
             state.isError = true
             state.message= action.payload
         })
-        .addCase(logout.pending, (state)=>{
+        .addCase(logout.pending, (state, action)=>{
             state.isLoading = true
             state.isSuccess = false
             state.isError = false
             state.message= ""
+            state.meta= {...action.meta, action: "logOut"}
         })
         .addCase(logout.fulfilled, (state, action)=>{
+            state.user= null;
             state.isLoading = false
             state.isSuccess = true
             state.isError = false
             state.message= ""
-            state.meta= {...action.meta, action: "logOut"}
+        })
+        .addCase(logout.rejected, (state, action)=>{
+            state.isLoading = false
+            state.isSuccess = false
+            state.isError = true
+            state.message= action.payload
         })
     }
 })

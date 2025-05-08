@@ -7,7 +7,7 @@ const RequiredAuth = () => {
     const user = JSON.parse(window.localStorage.getItem("user")) || useSelector(selectAuth)?.user
     const location = useLocation()
     // console.log("Auth/user", user)
-    if(Object.keys(user).length){
+    if(!!user){
         return <Outlet />
     }
 

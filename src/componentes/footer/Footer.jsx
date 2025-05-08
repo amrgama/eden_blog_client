@@ -7,6 +7,8 @@ import VerySmallCard from '../postCards/VerySmallCard'
 import SkeletonVerySmallCard from '../skeletonLoading/postCards/SkeletonVerySmallCard'
 import { data } from '../../assets/data'
 import useMediaQuery from '../../hooks/useMediaQuery'
+import { BASE_URL } from '../../api/axios'
+import { combineWithBaseUrl } from '../../utils/helper'
 
 const Footer = () => {
     const matches_max_768 = useMediaQuery("(max-width: 768px")
@@ -18,8 +20,10 @@ const Footer = () => {
     <footer className='py-5'>
         <div className="container pt-4 d-flex justify-content-between flex-wrap gap-4 gap-lg-3 gap-xl-4">
             <div className="col-12 col-md-6 col-xl-4">
-                <img src={images.logo} className='d-block mb-3'
-                style={{maxWidth: "130px"}} alt="..." />
+                <Link to={"/"}>
+                    <img src={images.logo} className='d-block mb-3'
+                    style={{maxWidth: "130px"}} alt="..." />
+                </Link>
                 <p className='text-start text-secondary m-0' style={{maxWidth: matches_max_768? "100%" : "400px"}}>
                     Thrive celebrates both the journey and the destination. We’re motivated like most who seek more out of life: to leap out of bed (or stumble), embrace risk, and chase after life worth living.
                 </p>

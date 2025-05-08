@@ -7,20 +7,26 @@ import { BsUpload } from 'react-icons/bs';
 import {AiOutlineEdit} from "react-icons/ai"
 import SkeletonImage from '../skeletonLoading/SkeletonImage';
 import usePrivateFetch from '../../hooks/usePrivateFetch';
+import { combineWithBaseUrl } from '../../utils/helper';
+import ActionButton from '../ui-kits/buttons/ActionButton';
+import { RiDeleteBin5Line } from 'react-icons/ri';
+import { useNavigate } from 'react-router-dom';
 
 // const Upload = ({id, name, text, imageUrlRef, imageUrlRefVal, onChange: handleFile, errMsg, extraClasses}) => {
 const UploadImg = ({id, text, onChange: handleFileErrors, defaulImageUrlVal, imageUrlRef, errMsg, extraClasses}) => {
     const classes = extraClasses? extraClasses: "";
-    const [imageUrl, setImageUrl] = useState(defaulImageUrlVal)
-   
+    const [imageUrl, setImageUrl] = useState(defaulImageUrlVal);
+    const navigate= useNavigate();
+    const inputRef= useRef();
     const {
         callApi, 
         isIdel,
         isLoading, 
         isSuccess, 
         errorMsg: apiErrorMsg
-    } = usePrivateFetch("/file/upload", "post", {headers: {"content-type": "multipart/form-data"}});
-
+    } = usePrivateFetch("/file", "post", {headers: {"content-type": "multipart/form-data"}}, navigate);
+    
+    const deleteFileApi = usePrivateFetch("/file", "delete", {}, navigate);
     const handleOnInput = (e)=>{
         handleFileErrors(e.target.files)
     }
@@ -32,13 +38,13 @@ const UploadImg = ({id, text, onChange: handleFileErrors, defaulImageUrlVal, ima
             const formData = new FormData()
         
             formData.append("image", value[0])
-            const response = await callApi(formData);
+            
+            const response = (!!imageUrl)? await callApi(`/${imageUrl?.split("/")?.at(-1)}`, formData, "put"): await callApi("/upload", formData, "post");
             setImageUrl(response?.image);
         }
     }
 
     useEffect(()=>{
-
         imageUrlRef.current = imageUrl;
     }, [imageUrl])
 
@@ -49,6 +55,7 @@ const UploadImg = ({id, text, onChange: handleFileErrors, defaulImageUrlVal, ima
             >
                 <input 
                     id={id}
+                    ref={inputRef}
                     type="file"             
                     onInput={handleOnInput}
                     onChange={upload}
@@ -56,7 +63,7 @@ const UploadImg = ({id, text, onChange: handleFileErrors, defaulImageUrlVal, ima
                     style={{visibility: "hidden"}}
                 />
                 {
-                    (!isSuccess && !!!imageUrl) &&
+                    (!isLoading && !!!imageUrl) &&
                     <label 
                     htmlFor={id} 
                     className='d-flex align-items-center justify-content-center'
@@ -72,20 +79,20 @@ const UploadImg = ({id, text, onChange: handleFileErrors, defaulImageUrlVal, ima
                     <SkeletonImage />
                 }
                 {
-                    (isSuccess || imageUrl) &&
+                    (!!imageUrl && !isLoading) &&
                     <>
                         <img 
                             id="imagePreview"
                             name="imagePreview"
-                            src={imageUrl}
+                            src={combineWithBaseUrl(imageUrl)}
                             alt="..."
                             className='d-block w-100 h-100'
-                            style={{objectFit: "cover", objectPosition: "center"}} 
+                            style={{objectFit: "contain", objectPosition: "center"}} 
                         />
                         <div className="overlay">
                             <label 
                             htmlFor='file'
-                            className='w-100 h-100 d-flex align-items-center justify-content-center'
+                            className='main-button d-flex align-items-center justify-content-center'
                             style={{cursor: "pointer"}}
                             >
                                 <div className='fs-4 text-white fs-bold position-relative'>
@@ -94,6 +101,24 @@ const UploadImg = ({id, text, onChange: handleFileErrors, defaulImageUrlVal, ima
                                     </span>
                                 </div>
                             </label>
+                            
+                            <ActionButton
+                                text={"Delete"}
+                                icon={<RiDeleteBin5Line className="mb-1 fs-5" />}
+                                cb={async()=> {
+                                    console.log("imageUrl", imageUrl);
+                                   const res= await deleteFileApi.callApi(`/${imageUrl?.split("/")?.at(-1)}`, {});
+                                    if(!!!res?.error){
+                                        setImageUrl(null);
+                                        inputRef.current.value= "";
+                                    }
+                                   console.log("res when delete", res);
+                                }}
+                                isLoading={deleteFileApi.isLoading}
+                                isDisable={deleteFileApi.isLoading}
+                                animated={false}
+                                extraClasses={"normalize-btn main-button fs-4 bg-transparent"}
+                            />
                         </div>
                     </>
                 }

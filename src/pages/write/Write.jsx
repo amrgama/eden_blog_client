@@ -3,7 +3,7 @@ import BreadCrumb from '../../componentes/breadCrumb/BreadCrumb'
 import Categories from '../../componentes/write/categories/Categories'
 import Privacy from '../../componentes/write/privacy/Privacy'
 import Tags from '../../componentes/write/tags/Tags'
-import { useLocation, useParams } from 'react-router-dom'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { createPost, editPost, getPost, reset, selectPost } from '../../features/post/postSlice'
 import { toast } from 'react-toastify'
@@ -54,7 +54,7 @@ const Write = () => {
         handleSubmit,
         control,
         register,
-        formState: {errors},
+        formState: {errors, isSubmitSuccessful},
         getValues,
         setValue,
         watch
@@ -67,7 +67,7 @@ const Write = () => {
     const {id: postId} = useParams()
     const location = useLocation()
     const dispatch = useDispatch();
-    
+    const navigate= useNavigate();
     const [pageName, setPageName] = useState(location.pathname.split("/").at(-1));
     // console.log("pageName", pageName)
     const {post: selectedPost, isLoading, isSuccess, isError, message, meta} = useSelector(selectPost)
@@ -129,26 +129,24 @@ const Write = () => {
 
     useEffect(()=>{
 
-        if(!isFirstRender.current && isSuccess && meta?.action === "get_post" && pageName === "edit"){
+        if(isSubmitSuccessful && isSuccess && meta?.action === "get_post" && pageName === "edit"){
             console.log("post_get_post", currentPost);
             setCurrentPost(selectedPost);
         }
 
-        if(!isFirstRender.current && isSuccess && meta?.action === "create_post"){
+        if(isSubmitSuccessful && isSuccess && meta?.action === "create_post"){
             toast.success("Article created successfully")
+            navigate(`/account/${window?.localStorage?.getItem("user")?.userName}`)
         }
         // console.log("isFirstRender.current", isFirstRender.current,"isSuccess: ", isSuccess, "meta.action", meta?.action);
-        if(!isFirstRender.current && isSuccess && meta?.action === "edit_post"){
-            toast.success("Article edited successfully")
+        if(isSubmitSuccessful && isSuccess && meta?.action === "edit_post"){
+            toast.success("Article edited successfully");
+            navigate(`/account/${window?.localStorage?.getItem("user")?.userName}`)
         }
 
         // console.log(isError, "action", meta?.action);
-        if(isError && (meta?.action === "create_post" || meta?.action === "edit_post")){
+        if(isSubmitSuccessful && isError && (meta?.action === "create_post" || meta?.action === "edit_post")){
             toast.error(message)
-        }
-
-        return ()=>{
-            isFirstRender.current = false;
         }
 
     }, [currentPost, isLoading, isSuccess, isError, dispatch])

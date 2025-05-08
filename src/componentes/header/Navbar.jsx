@@ -11,21 +11,23 @@ import useMediaQuery from '../../hooks/useMediaQuery'
 import Menu from './Menu'
 import LinkButton from '../ui-kits/LinkButton'
 import ActionButton from '../ui-kits/buttons/ActionButton'
+import { BASE_URL } from '../../api/axios'
+import { combineWithBaseUrl } from '../../utils/helper'
 const Navbar = () => {
   const {user} = useSelector(selectAuth)
   const {pathname} = useLocation();
   const matches_lg= useMediaQuery("(min-width: 992px)")
-
+  console.log("user>>Innavbar", user);
   const renderedNavbarTabs = navbarTabsConfig.map((item, i)=> {
-    if(item.protected && !!Object.keys(user).length){
+    if(item?.protected && !!user){
 
       return(
         <li key={i} className="nav-item">
           <Link
-            to={item.link}
+            to={item?.link}
             className={`nav-link h-100 strike px-3 lh-lg text-capitalize text-center position-relative ${(pathname === item.link)? "active": ""}`} 
           >
-            {item.label}
+            {item?.label}
           </Link>
         </li>
       )  
@@ -50,7 +52,7 @@ const Navbar = () => {
     <nav className="navbar w-100 navbar-expand-lg p-0">
       <div className="container">
         <div className="d-flex align-items-center w-100 position-relative">
-          <Link className="navbar-brand" to="#">
+          <Link className="navbar-brand" to="/">
             <img src={images.logo} alt="..." />
           </Link>
           {
@@ -70,7 +72,7 @@ const Navbar = () => {
             </Menu>
           }
           <div className="auth d-flex flex-wrap ms-auto gap-3 me-2 me-lg-0 order-lg-3" style={{height: "40px"}}>
-              {  !!!Object.keys(user).length &&
+              {  !!!user &&
                 <>
                   <LinkButton link={"/login"} text={"Log In"} extraClasses={"strike text-center px-3 border border-2 rounded-pill shadow-none"} />
                   
@@ -82,7 +84,7 @@ const Navbar = () => {
                   />
                 </>
               }  
-            {!!Object.keys(user).length && <User user={user} />}
+            {!!user && <User user={user} />}
           </div>
         </div>
       </div>

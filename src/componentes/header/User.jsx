@@ -16,9 +16,11 @@ const User = ({user}) => {
     const onLogout = async (e)=>{
         e.preventDefault();
         try{
-            dispatch(logout())
+            const res= await dispatch(logout())
             // dispatch(reset())
-            navigate("/login")
+            if(res?.meta?.requestStatus == "fulfilled"){
+                navigate("/login")
+            }
         }
         catch(err){
             

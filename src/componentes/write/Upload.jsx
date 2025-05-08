@@ -7,6 +7,7 @@ import { BsUpload } from 'react-icons/bs';
 import {AiOutlineEdit} from "react-icons/ai"
 import SkeletonImage from '../skeletonLoading/SkeletonImage';
 import usePrivateFetch from '../../hooks/usePrivateFetch';
+import { combineWithBaseUrl } from '../../utils/helper';
 
 function validation(files){
     if(!files.length) return "You must upload image"
@@ -111,7 +112,7 @@ const Upload = ({watch, id, name, text, defaultVal, imageUrlRef, register, errMs
                 const formData = new FormData()
                  console.log("watch()image", watch("image")[0]);
                 formData.append("image", watch("image")[0])
-                const response = await callApi(formData);
+                const response = await callApi(null, formData);
                 // setImageUrl(response.image);
                 return response.image;
              })()
@@ -160,7 +161,7 @@ const Upload = ({watch, id, name, text, defaultVal, imageUrlRef, register, errMs
                         <img 
                             id="imagePreview"
                             name="imagePreview"
-                            src={imageUrl}
+                            src={combineWithBaseUrl(imageUrl)}
                             alt="..."
                             className='d-block w-100 h-100'
                             style={{objectFit: "cover", objectPosition: "center"}} 

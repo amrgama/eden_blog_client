@@ -3,6 +3,7 @@ import {GoBookmark, GoBookmarkFill} from "react-icons/go"
 import { AnimatePresence, motion } from 'framer-motion'
 import { useDispatch } from 'react-redux'
 import { savePost } from '../../features/post/postSlice'
+import { useNavigate } from 'react-router-dom'
 
 const SaveBtn = ({postId, userId, saveList}) => {
   const dispatch = useDispatch()
@@ -10,20 +11,26 @@ const SaveBtn = ({postId, userId, saveList}) => {
   const [active, setActive] = useState(false);
   const [users, setUsers] = useState([])
   const [count, setCount] = useState(0);
+  const navigate= useNavigate();
 
   const onClick = (e)=>{
-    setActive(!active)
-    setCount(prev => {
-      if(!active) return prev + 1
-      return prev - 1
-    })
+    if(!!user){
+      setActive(!active)
+      setCount(prev => {
+        if(!active) return prev + 1
+        return prev - 1
+      })
 
-    setUsers(prev => {
-      if(!active) return [...prev, user]
-      return prev.filter(prevUser => prevUser._id !== userId)
-    })
+      setUsers(prev => {
+        if(!active) return [...prev, user]
+        return prev.filter(prevUser => prevUser._id !== userId)
+      })
 
-    dispatch(savePost(postId))
+      dispatch(savePost(postId))
+    }
+    else{
+      navigate("join-to-us")
+    }
   }
 
   useEffect(()=>{

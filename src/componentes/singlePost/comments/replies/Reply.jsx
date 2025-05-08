@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import SubReplyForm from './subReplies/SubReplyForm';
 import SubReply from './subReplies/SubReply';
 import SubReplies from './subReplies/SubReplies';
+import { combineWithBaseUrl } from '../../../../utils/helper';
 
 
 const Reply = ({commentId, reply: {_id: replyId, userId: user, createdAt, content, numOfNestedReplies}}) => {
@@ -20,7 +21,7 @@ const Reply = ({commentId, reply: {_id: replyId, userId: user, createdAt, conten
 
     return (
     <div className='w-100 d-flex flex-wrap border border-3 border-dark styled-box px-3 py-2'>
-        <img src={images.user_2} className='rounded-circle' style={{width: "37.5px", height: "37.5px"}} alt="..." />
+        <img src={combineWithBaseUrl(user?.vector)} className='rounded-circle' style={{width: "37.5px", height: "37.5px"}} alt="..." />
         <div className="col d-flex flex-wrap justify-content-between gap-1 ps-2">
             <div className="user d-flex flex-column">
                 {/* <span className='user-full-name fw-bold text-capitalize'>{user?.firstName} {user?.lastName}</span>

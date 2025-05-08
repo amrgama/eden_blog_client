@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { BsPerson, BsUpload } from 'react-icons/bs';
 import ErrorMsg from '../../../form/ErrorMsg';
 import { uploadImg } from '../../../../features/post/postSlice';
+import { BASE_URL } from '../../../../api/axios';
+import { combineWithBaseUrl } from '../../../../utils/helper';
 
 const isValidType= (file)=>{
     const validTypes = ["image/jpeg", "image/png", "image/jpg", "image/svg+xml"]
@@ -67,7 +69,7 @@ const EditableVector = ({id, name, value, onChange, imageUrlRef, imageUrlRefVal,
                         <img 
                         id="imagePreview"
                         name="imagePreview"
-                        src={imageUrl}
+                        src={combineWithBaseUrl(imageUrl)}
                         alt="..."
                         className='d-block w-100 h-100 rounded-circle position-absolute top-0 start-0'
                         style={{objectFit: "cover", objectPosition: "center"}} 

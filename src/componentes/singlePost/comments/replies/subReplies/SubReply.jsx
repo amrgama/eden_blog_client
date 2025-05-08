@@ -4,6 +4,7 @@ import TimeAgo from '../../../TimeAgo'
 import { AnimatePresence, motion, transform } from 'framer-motion';
 import SubReplyForm from '.././subReplies/SubReplyForm';
 import {GiBottomRight3DArrow} from "react-icons/gi";
+import { combineWithBaseUrl } from '../../../../../utils/helper';
 
 const SubReply = ({commentId, mainReplyId, nestedReply: {_id: replyId, replyToId, userId: user, createdAt, content}, setAllNestedReplies}) => {
     // console.log("date", date)
@@ -12,7 +13,7 @@ const SubReply = ({commentId, mainReplyId, nestedReply: {_id: replyId, replyToId
     console.log("user in nestedreply ", user, "mainReplyId", mainReplyId, "replyToId", replyToId)
     return (
     <div className='w-100 d-flex flex-wrap border border-3 border-dark styled-box px-3 py-2'>
-        <img src={images.user_1} className='rounded-circle' style={{width: "35px", height: "35px"}} alt="..." />
+        <img src={combineWithBaseUrl(user?.vector)} className='rounded-circle' style={{width: "35px", height: "35px"}} alt="..." />
         <div className="col d-flex flex-wrap justify-content-between gap-1 ps-2">
             <div className='w-100 d-flex justify-content-between'>
                 <div className="user d-flex flex-column">

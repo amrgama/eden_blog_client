@@ -10,8 +10,10 @@ import { selectPosts, getPostsByQuery } from '../features/posts/postsSlice';
 import useObserver from '../hooks/useObserver';
 import SkeletonBigCard from '../componentes/skeletonLoading/postCards/SkeletonBigCard';
 import Observed from '../componentes/ui-kits/Observed';
+import notFoundPosts from "../assets/animations/notFoundPosts.json"
+import Lottie from 'lottie-react';
 
-const LatestNews = () => {
+const LatestNew = () => {
     const dispatch= useDispatch();
     const allPosts= useRef([]);
     const {posts, isLoading, isSuccess, isError, message}= useSelector(selectPosts)
@@ -63,33 +65,40 @@ const LatestNews = () => {
     })
 
     return (
-    <div id="latestNews">
-        <BreadCrumb title={"latest news"}/>
+    <div id="LatestNew">
+        <BreadCrumb title={"latest new"}/>
         <section className='py-5'>
             <div className="container">
                <div className="row justify-content-between gap-5 m-0">
                     <div className='col-12 col-lg d-flex flex-column gap-5 p-0 order-2 order-lg-1'>
                         {
-                            (isLoading && !!!posts.length) &&
-                            <>
-                                <SkeletonBigCard />
-                                <SkeletonBigCard />
-                                <SkeletonBigCard />
-                            </>
-                        }
-                        {
-                            (!!allPosts.current.length) &&
-                            <>
-                                {renderedPostCards}
-                                <Observed reference={observedEle} cb={handleLoadingPosts} />
-                            </>
+                            (isLoading && !!!posts.length)?
+                                <>
+                                    <SkeletonBigCard />
+                                    <SkeletonBigCard />
+                                    <SkeletonBigCard />
+                                </>
+                            :
+                                (!!allPosts.current.length)?
+                                <>
+                                    {renderedPostCards}
+                                    <Observed reference={observedEle} cb={handleLoadingPosts} />
+                                </>
+                                :
+                                    <div className="w-100 d-flex flex-column flex-wrap justify-content-cente align-items-center" style={{height: "520px"}}>
+                                        <Lottie  animationData={notFoundPosts} style={{height: "400px"}}/>
+                                        <span className="fs-4 bold">There are't posts yet.</span>
+                                    </div>
                         }
                     </div>
-                    <div className='col position-lg-sticky d-flex flex-column gap-5 p-0 order-1 order-lg-2'
-                    style={{maxWidth: `${matches_lg? "360px": ""}`, height: "fit-content", top: "1.5rem"}}>
-                        <CategoriesLinks label={"Categories"} matchWith={[data[0].category]} />
-                        <TagsLinks label={"Tags"} matchWith={data[0].tags} />
-                    </div>
+                    {
+                        (!!allPosts.current.length) &&
+                        <div className='col position-lg-sticky d-flex flex-column gap-5 p-0 order-1 order-lg-2'
+                        style={{maxWidth: `${matches_lg? "360px": ""}`, height: "fit-content", top: "1.5rem"}}>
+                            <CategoriesLinks label={"Categories"} matchWith={[data[0].category]} />
+                            <TagsLinks label={"Tags"} matchWith={data[0].tags} />
+                        </div>
+                    }
                 </div>
             </div>    
         </section>
@@ -97,4 +106,4 @@ const LatestNews = () => {
   )
 }
 
-export default LatestNews
+export default LatestNew

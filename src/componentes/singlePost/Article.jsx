@@ -10,19 +10,20 @@ import PostTools from './postTools/PostTools'
 import { EditorState, convertFromRaw } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
-
+import { combineWithBaseUrl } from '../../utils/helper'
 
 const Article = ({post}) => {
   const params = useParams();
   const postId = params.id;
   const user = JSON.parse(window.localStorage.getItem("user"))
   const userId = user?.id;
+
   let rawContent, convertedRawContent;
   if(post?.content){
     rawContent = JSON.parse(post?.content);
     convertedRawContent = convertFromRaw(rawContent);
   }
- 
+
   useEffect(()=>{
     const editorToolbar = document.querySelector(".rdw-editor-toolbar");
     const textEditor = document.querySelector(".notranslate");
@@ -37,7 +38,7 @@ const Article = ({post}) => {
 
   return (
     <article className='d-block w-100 position-relative p-0 bg-white'>
-      <img src={post?.image} className='d-block w-100 object-fit-cover' style={{height: "370px", objectPosition: "center"}} alt="..." />
+      <img src={combineWithBaseUrl(post?.image)} className='d-block w-100 object-fit-contain' style={{height: "370px", objectPosition: "center"}} alt="..." />
       <div className='d-flex flex-column gap-3 p-4 text-start'>
         <div className="w-100 d-flex align-items-center justify-content-between gap-3">
           <div className='d-flex flex-wrap gap-1'>
@@ -54,7 +55,10 @@ const Article = ({post}) => {
               {post.readings}
               <BsEye className='ms-1' />
             </span>
-            <PostTools />
+            {
+              !!user &&
+              <PostTools />
+            }
           </div>
         </div>
         <span className="category w-100 fw-bold text-capitalize text-start">\ {post?.category}</span>

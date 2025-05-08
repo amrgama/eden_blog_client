@@ -1,11 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { BASE_URL } from '../../api/axios'
+import { combineWithBaseUrl } from '../../utils/helper'
 
 const SmallCard = ({postData, extraClasses}) => {
 
   return (
     <div className={`${extraClasses} small-card d-flex gap-3`}>
-      <img src={postData.image} className='d-inline-block' style={{width: "150px", height:"120px", objectFit:"fill", objectPosition: "center"}} alt="..." />
+      <img src={postData.isStatic? postData.image: combineWithBaseUrl(postData.image)} className='d-inline-block' style={{width: "150px", height:"120px", objectFit:"fill", objectPosition: "center"}} alt="..." />
       <div className="d-flex flex-wrap gap-1">
         <div className='d-flex flex-wrap'>
           {

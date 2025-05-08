@@ -3,6 +3,7 @@ export const data = [
     {   
         _id: 1,
         title: "Astronomy 101: Understanding the Basics",
+        isStatic: true,
         tags: ["technology", "travel"],
         category: "spaces",
         author: {
@@ -22,6 +23,7 @@ export const data = [
     {   
         _id: 2,
         title: "The Remarkable Creations of Iconic Individuals",
+        isStatic: true,
         tags: ["technology", "travel", "food"],
         category: "electric",
         author: {
@@ -41,6 +43,7 @@ export const data = [
     {   
         _id: 3,
         title: "The Wonders of Black Holes of Spacetime",
+        isStatic: true,
         tags: ["technology", "travel", "food"],
         category: "spaces",
         author: {
@@ -60,6 +63,7 @@ export const data = [
     {   
         _id: 4,
         title: "The Benefits of Electric Vehicles",
+        isStatic: true,
         tags: ["technology", "travel", "cars"],
         category: "spaces",
         author: {

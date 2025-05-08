@@ -39,13 +39,12 @@ const LogInForm = () => {
 
     useEffect(()=>{
 
-        if(meta?.action === "logIn"){
+        if(meta?.action == "logIn"){
 
             if(isError){
                 toast.error(message)
             }
-    
-            if(isSuccess && Object.keys(user).length){
+            else if(isSuccess && !!user){
                 navigate("/")
             }
         }

@@ -44,7 +44,8 @@ export const reactOnPost = async(postId, userId)=>{
 }
 
 export const incReadingsByOne = async(postId, isReader)=>{
-    const response = await axios
+    const axiosWithInterceptors = await withInterceptors();
+    const response = await axiosWithInterceptors
     .put(`/post/increase-readings?postId=${postId}&isReader=${isReader}`);
     console.log("response in increase readings", response)
     return response.data;

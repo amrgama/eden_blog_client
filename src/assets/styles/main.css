@@ -12126,6 +12126,7 @@ footer {
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 2rem;
 }
 .image-upload-box:has(img):hover .overlay {
   inset: 0px;
@@ -12326,10 +12327,10 @@ input.form-control:-webkit-autofill {
 
 .main-button:hover, .main-button *:hover {
   color: #ff7a7f !important;
-  background-color: transparent;
+  background-color: transparent !important;
 }
 .main-button.active {
-  background-color: transparent;
+  background-color: transparent !important;
 }
 
 .navbar .auth-container .nav-link {

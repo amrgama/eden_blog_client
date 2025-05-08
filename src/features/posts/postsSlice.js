@@ -109,7 +109,13 @@ const postsSlice = createSlice({
     extraReducers: (builder)=>{
         builder
         .addCase(getMyPosts.fulfilled, (state, action)=>{
-            state.posts = [...action.payload]
+            state.posts = action.payload.posts
+            state.meta= {
+                ...state.meta,
+                limit: action.payload.limit,
+                page: action.payload.page,
+                pageCount: action.payload.pageCount
+            }
             state.isLoading= false
             state.isSuccess= true
             state.isError= false
@@ -128,7 +134,13 @@ const postsSlice = createSlice({
             state.message= ""
         })
         .addCase(getUserPosts.fulfilled, (state, action)=>{
-            state.posts = [...action.payload]
+            state.posts = action.payload.posts
+            state.meta= {
+                ...state.meta,
+                limit: action.payload.limit,
+                page: action.payload.page,
+                pageCount: action.payload.pageCount
+            }
             state.isLoading= false
             state.isSuccess= true
             state.isError= false
@@ -148,7 +160,13 @@ const postsSlice = createSlice({
             state.meta= {...state.meta, action: "get_posts_by_query"}
         })
         .addCase(getPostsByQuery.fulfilled, (state, action)=>{
-            state.posts = action.payload;
+            state.posts = action.payload.posts;
+            state.meta= {
+                ...state.meta,
+                limit: action.payload.limit,
+                page: action.payload.page,
+                pageCount: action.payload.pageCount
+            }
             state.isLoading= false
             state.isSuccess= true
             state.isError= false
@@ -168,7 +186,13 @@ const postsSlice = createSlice({
             state.meta= {...state.meta, action: "get_more_posts"}
         })
         .addCase(getMorePosts.fulfilled, (state, action)=>{
-            state.posts = [...action.payload]
+            state.posts = [...state.posts, ...action.payload.posts]
+            state.meta= {
+                ...state.meta,
+                limit: action.payload.limit,
+                page: action.payload.page,
+                pageCount: action.payload.pageCount
+            }
             state.isLoading= false
             state.isSuccess= true
             state.isError= false

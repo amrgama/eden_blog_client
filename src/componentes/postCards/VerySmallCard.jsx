@@ -1,11 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { combineWithBaseUrl } from '../../utils/helper'
 
 const VerySmallCard = ({postData, extraClasses, whiteText=false}) => {
 
   return (
     <div className={`${extraClasses} very-small-card d-flex gap-3`}>
-      <img src={postData.image} className='d-inline-block' style={{width: "50px", height: "50px", objectFit: "fill", objectPosition: "center"}} alt="..." />
+      <img src={postData?.isStatic? postData.image: combineWithBaseUrl(postData.image)} className='d-inline-block' style={{width: "50px", height: "50px", objectFit: "fill", objectPosition: "center"}} alt="..." />
       <div className="d-flex flex-column flex-wrap gap-1">
         <h4 className={`card-title m-0 fs-7 fw-bold ${whiteText? "text-white": "text-dark"} text-start`}>
           <Link 

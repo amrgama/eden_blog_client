@@ -2,12 +2,14 @@ import React from 'react'
 import {BsEye} from "react-icons/bs"
 import { Link } from 'react-router-dom'
 import TimeAgo from '../singlePost/TimeAgo'
+import { BASE_URL } from '../../api/axios'
+import { combineWithBaseUrl } from '../../utils/helper'
 
 const NormalCard = ({postData, extraClasses}) => {
 
   return (
     <div className={`${extraClasses} normal-card border border-dark box-shadow-sm bg-white p-3 p-md-4`}>
-        <img src={postData.image} className='col-12 d-block'
+        <img src={postData.isStatic? postData.image: combineWithBaseUrl(postData.image)} className='col-12 d-block'
         style={{maxHeight: "350px"}} alt="..." />
         <div className='col-12 pt-4 text-start d-flex flex-column gap-3'>
             <div className='d-flex flex-wrap gap-1'>

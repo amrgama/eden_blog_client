@@ -2,13 +2,11 @@
 import React, { useEffect, useState } from 'react'
 import { BsPersonPlus } from "react-icons/bs";
 import ActionButton from '../../ui-kits/buttons/ActionButton';
-import usePrivateFetch from "../../../hooks/usePrivateFetch";
 import { toast } from 'react-toastify';
 import { follow, selectAccount } from '../../../features/account/accountSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
 const FollowButton = ({onFollow, accountId, className}) => {
-  // const {callApi, response, isLoading, isSuccess, isError, errorMsg} = usePrivateFetch(`/user/${accountId}/follow`, "put");
  const {isLoading, isSuccess, isError, message, meta}= useSelector(selectAccount);
  const dispatch = useDispatch();
 

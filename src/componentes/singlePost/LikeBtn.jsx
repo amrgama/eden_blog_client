@@ -3,6 +3,7 @@ import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useDispatch } from 'react-redux'
 import {react} from "../../features/post/postSlice"
+import { useNavigate } from 'react-router-dom'
 
 // const getUser = ()=>{
 //   const isGuest = ()=>{
@@ -21,20 +22,27 @@ const LikeBtn = ({postId, userId, reactionList}) => {
   const [active, setActive] = useState(false);
   const [users, setUsers] = useState([])
   const [count, setCount] = useState(0);
+  const navigate= useNavigate();
 
   const onClick = (e)=>{
-    setActive(!active)
-    setCount(prev => {
-      if(!active) return prev + 1
-      return prev - 1
-    })
+    if(!!user){
+      
+      setActive(!active)
+      setCount(prev => {
+        if(!active) return prev + 1
+        return prev - 1
+      })
 
-    setUsers(prev => {
-      if(!active) return [...prev, user]
-      return prev.filter(prevUser => prevUser?._id !== userId)
-    })
+      setUsers(prev => {
+        if(!active) return [...prev, user]
+        return prev.filter(prevUser => prevUser?._id !== userId)
+      })
 
-    dispatch(react({postId, userId}))
+      dispatch(react({postId, userId}))
+    }
+    else{
+      navigate("join-to-us");
+    }
   }
 
   useEffect(()=>{

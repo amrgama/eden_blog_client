@@ -12,12 +12,10 @@ const CreateComment = () => {
   return (
     <div id='createComment' className='text-start py-4'>
         <span className='fs-5 fw-bold text-dark mb-4'>Leave Comment</span>
-        {   user &&
-            <AuthCommentForm user={{...user}} />
-        }
-        {   !user &&
+        <AuthCommentForm user={user} />
+        {/* {   !user &&
             <UnAuthCommentForm user={{...user}} />
-        }
+        } */}
     </div>
   )
 }

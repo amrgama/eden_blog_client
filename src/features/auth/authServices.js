@@ -11,7 +11,7 @@ const register = async(userData)=>{
 }
 
 const login = async(userData)=>{
-    const response = await axios.post("/auth/login", JSON.stringify(userData),
+    const response = await axiosPrivate.post("/auth/login", JSON.stringify(userData),
     {
         headers: {'Content-Type': "application/json"},
         withCredentials: true
@@ -20,7 +20,7 @@ const login = async(userData)=>{
 }
 
 const logout = async()=>{
-    const response = await axios.get("/auth/logout",{
+    const response = await axiosPrivate.get("/auth/logout",{
         withCredentials: true,
     })
     return response.data

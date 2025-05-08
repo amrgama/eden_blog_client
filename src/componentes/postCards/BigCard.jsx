@@ -6,6 +6,8 @@ import TimeAgo from '../singlePost/TimeAgo'
 // import { selectAuth } from '../../features/auth/authSlice'
 // import { increaseReadings } from '../../features/post/postSlice'
 import useMediaQuery from '../../hooks/useMediaQuery'
+import { BASE_URL } from '../../api/axios'
+import { combineWithBaseUrl } from '../../utils/helper'
 
 const BigCard = ({postData, type, extraClasses, style}) => {
     const matches = useMediaQuery("(min-width: 576px)");
@@ -25,7 +27,7 @@ const BigCard = ({postData, type, extraClasses, style}) => {
             style={style}
         >
             <img
-                src={postData.image} 
+                src={postData.isStatic? postData.image: combineWithBaseUrl(postData.image)} 
                 alt={`${postData.title} image`}
                 className={`col-12 ${(direction === "horizontal")? "col-sm" : ""} h-100 d-block`}
                 style={{minHeight: "200px", maxHeight: "280px", maxWidth: (direction === "horizontal" && matches)? "290px": "100%" ,objectFit: "fill", objectPosition: "center"}}

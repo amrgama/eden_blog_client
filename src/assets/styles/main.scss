@@ -115,10 +115,10 @@ input.form-control:-webkit-autofill{
 .main-button{
     &:hover, & *:hover{
         color: $primary !important;
-        background-color: transparent;
+        background-color: transparent !important;
     }
     &.active{
-        background-color: transparent;
+        background-color: transparent !important;
     }
 }
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react'
-import { useParams } from 'react-router-dom'
+import { Outlet, useParams } from 'react-router-dom'
 // import images from '../assets/images';
 import BreadCrumb from '../componentes/breadCrumb/BreadCrumb';
 import Article from '../componentes/singlePost/Article';
@@ -32,6 +32,7 @@ const SinglePost = () => {
     const matches = useMediaQuery("(min-width: 992px)");
 
     // cash("post", {id,...post}, "session");
+    console.log("idParam>>", id);
 
     commentsRef.current= (Object.keys(post).length)? [...post.comments.values]: [];
     console.log("commentRef in singlePost", commentsRef.current)
@@ -112,6 +113,7 @@ const SinglePost = () => {
                 </div>
             </div>    
         </section>
+        <Outlet />
     </div>
   )
 }

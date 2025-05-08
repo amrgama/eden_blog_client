@@ -3,10 +3,11 @@ import {BsTwitter, BsPerson, BsQuora, BsReddit, BsYoutube} from 'react-icons/bs'
 import {GrFacebookOption} from 'react-icons/gr'
 import { Link } from 'react-router-dom'
 import UserSetting from './UserSetting'
-import { isObjEmpty } from '../../../utils/helper'
+import { combineWithBaseUrl, isObjEmpty } from '../../../utils/helper'
 import FollowButton from './FollowButton'
 import WriteButton from './WriteButton'
 import FollowingButton from './FollowingButton'
+import { BASE_URL } from '../../../api/axios'
 
 const UserInfo = ({account, authUser}) => {
     // const {username} = useParams();
@@ -71,7 +72,7 @@ const UserInfo = ({account, authUser}) => {
                         {
                             account.vector &&
                             <img 
-                                src={account?.vector} 
+                                src={combineWithBaseUrl(account?.vector)} 
                                 className='vector rounded-circle' alt="..."
                                 style={{width: "80px", height:"80px"}} 
                             />

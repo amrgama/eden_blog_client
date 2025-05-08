@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getMainReplies, selectReplies } from '../../../features/comment/replies/repliesSlice';
 import { toast } from 'react-toastify';
 import Replies from './replies/replies';
+import { combineWithBaseUrl } from '../../../utils/helper';
 
 const CommentsItem = ({comment: {value: {_id: commentId, userId: user, createdAt, content}, numOfMainReplies}}) => {
     const {id: postId} = useParams();
@@ -27,7 +28,7 @@ const CommentsItem = ({comment: {value: {_id: commentId, userId: user, createdAt
         className='d-flex flex-wrap border border-3 border-dark styled-box px-3 py-3'
         style={{maxWidth: "600px"}}
     >
-        <img src={(user.firstName === "ahmed")?images.user_1: images.user_2} className='rounded-circle' style={{width: "40px", height: "40px"}} alt="..." />
+        <img src={combineWithBaseUrl((user.firstName === "ahmed")?user?.vector: user?.vector)} className='rounded-circle' style={{width: "40px", height: "40px"}} alt="..." />
         <div className="col d-flex flex-column gap-1 ps-2">
             <div className="d-flex">
                 <span className="user d-inline-flex flex-column me-auto">

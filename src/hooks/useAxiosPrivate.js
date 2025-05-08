@@ -30,7 +30,7 @@ const useAxiosPrivate = async()=>{
                     axiosPrivate(prevRequest)
                 }
                 else if(error?.response?.status === 401 && !prevRequest.sent){
-                    window.localStorage.removeItem("user")
+                    window.localStorage.removeItem("user");
                 }
                 return Promise.reject(error);
             }

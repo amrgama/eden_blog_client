@@ -1,11 +1,8 @@
 import { useState } from "react";
 import withInterceptors from "../utils/withInterceptors";
+import { toast } from "react-toastify";
 
-const usePrivateFetch= (url, method, apiConfig) =>{
-    
-    if(!!!url){
-        throw new Error("You must input api variable");
-    }
+const usePrivateFetch= (base_url, defaultMethod= "get", apiConfig= {}, navigate) =>{
 
     const [isIdel, setIsIdel]= useState(true);
     const [isLoading, setIsLoading]= useState(false);
@@ -13,13 +10,23 @@ const usePrivateFetch= (url, method, apiConfig) =>{
     const [isError, setIsError]= useState(false);
     const [errorMsg, setErrorMsg]= useState("");
     
-    async function callApi(data= {}){
+    async function callApi(url, data= {}, method= defaultMethod){
 
         try{
             setIsIdel(false);
             setIsLoading(true);
             const axiosWithInterceptors = await withInterceptors();
-            const response = await axiosWithInterceptors[`${method ?? "get"}`](url, data, apiConfig);
+            let api= "";
+            if(!!base_url && !!url){
+                api= base_url + url;
+            }else if(!!base_url && !!!url){
+                api= base_url;
+            }
+            else if(!!!base_url && !!url){
+                api= url;
+            }
+            
+            const response = await axiosWithInterceptors[`${method ?? "get"}`](api, data, apiConfig);
             setIsLoading(false);
             setIsSuccess(true);
 
@@ -30,7 +37,27 @@ const usePrivateFetch= (url, method, apiConfig) =>{
             setIsLoading(false);
             setIsError(true);
             setErrorMsg(err);
-            console.log("error in usefetch", err)
+            console.log("error in usefetch", err);
+            let message= "";
+            if(!err?.response){
+                message = "No server response"
+            }
+            else if(err?.response?.status === 400){
+                message = "Missing some post information"
+            }
+            else if(err?.response?.status === 401){
+                message = "You are not logged in"
+                if(!!navigate) navigate("/login")
+            }
+            else if(err?.response?.status === 403){
+                message = "Your session is ended, log in again"
+                if(!!navigate) navigate("/login")
+            }
+            else{
+                message = err?.message
+            }
+            toast.error(message);
+            return err;
         }
     }
 

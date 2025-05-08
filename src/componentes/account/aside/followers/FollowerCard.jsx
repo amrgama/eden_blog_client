@@ -4,6 +4,8 @@ import { Link, useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux';
 import { selectAuth } from '../../../../features/auth/authSlice';
 import { BsPerson } from 'react-icons/bs';
+import { BASE_URL } from '../../../../api/axios';
+import { combineWithBaseUrl } from '../../../../utils/helper';
 
 const FollowerCard = ({follower}) => {
     const {username} = useParams();
@@ -18,7 +20,7 @@ const FollowerCard = ({follower}) => {
                     </span>
                 :
                     <img 
-                        src={follower.vector} 
+                        src={combineWithBaseUrl(follower.vector)} 
                         alt="follower image"
                         className='d-block rounded-circle border border-dark'
                         style={{width: "55px", height: "55px", objectFit: "contain", objectPosition: "center"}} 

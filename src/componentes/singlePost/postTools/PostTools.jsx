@@ -3,12 +3,13 @@ import {CiMenuKebab} from "react-icons/ci";
 import { AnimatePresence, motion } from 'framer-motion'
 import Edit from "./Edit";
 import Delete from "./Delete";
+import { useSelector } from "react-redux";
+
 
 const PostTools = ()=>{
     const [show, setShow] = useState(false);
     // const [activeEdit, setActiveEdit] = useState(false);
     // const [activeDelete, setActiveDelete] = useState(false);
-
     function handleOnClick(){
         setShow(prev => !prev)
     }

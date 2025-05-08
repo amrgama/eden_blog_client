@@ -6,6 +6,8 @@ import { selectAuth } from '../../../../features/auth/authSlice';
 import { BsPerson } from 'react-icons/bs';
 import { selectAccount } from '../../../../features/account/accountSlice';
 import FollowButton from '../../userInfo/FollowButton';
+import { BASE_URL } from '../../../../api/axios';
+import { combineWithBaseUrl } from '../../../../utils/helper';
 
 const FollowingCard = ({user}) => {
     const {username} = useParams();
@@ -39,7 +41,7 @@ const FollowingCard = ({user}) => {
                     </span>
                 :
                     <img 
-                        src={user.vector} 
+                        src={combineWithBaseUrl(user.vector)} 
                         alt="follower image"
                         className='d-block rounded-circle border border-dark'
                         style={{width: "55px", height: "55px", objectFit: "contain", objectPosition: "center"}} 

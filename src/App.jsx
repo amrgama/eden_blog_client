@@ -2,7 +2,7 @@ import './App.css'
 import { Routes, Route } from 'react-router-dom'
 import Home from './pages/Home'
 import DinamicPage from './pages/DinamicPage'
-import LatestNews from './pages/LatestNews'
+import LatestNew from './pages/LatestNew'
 import SinglePost from './pages/SinglePost'
 import SignUp from './pages/register/SignUp'
 import LogIn from './pages/auth/logIn/LogIn'
@@ -12,6 +12,7 @@ import Layout from './componentes/Layout'
 import RequiredAuth from './componentes/RequiredAuth'
 import Account from './pages/account/Account'
 import Trending from './pages/Trending'
+import JoinToUsModal from './componentes/modal/JoinToUsModal'
 
 
 function App() {
@@ -23,11 +24,13 @@ function App() {
           <Route path='signup' element={<SignUp />}></Route>
           <Route path='login' element={<LogIn />}></Route>
           <Route index element={<Home />}></Route>
-          <Route path='latest-new' element={<LatestNews />}></Route>
+          <Route path='latest-new' element={<LatestNew />}></Route>
           <Route path='trending' element={<Trending />}></Route>
           <Route path='blog'>
             <Route index element={<DinamicPage />}></Route>
-            <Route path=':id' element={<SinglePost />}></Route>
+            <Route path=':id' element={<SinglePost />}>
+              <Route path='join-to-us' element={<JoinToUsModal />} />
+            </Route>
           </Route>
           {/* protected routes */}
           <Route element={<RequiredAuth />}>

@@ -1,4 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
+import { BASE_URL } from '../api/axios';
 
 export function generate_uuid() {
     return uuidv4().slice(0, 12);
@@ -56,4 +57,13 @@ export function removeFromCash(key, store="localStorage"){
 export function fillWithDash(text){
     const textArr = text.split(" ");
     return textArr.join("-");
+}
+
+export function combineWithBaseUrl(path){
+    if(!path?.startsWith("http")){
+        if(path?.startsWith("/")) return BASE_URL + path;
+        return BASE_URL + "/" + path;
+    }else{
+        return path;
+    }
 }

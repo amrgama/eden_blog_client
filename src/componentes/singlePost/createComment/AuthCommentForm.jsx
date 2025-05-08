@@ -8,7 +8,7 @@ import send from "../../../assets/animations/Send 2.json"
 import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux';
 import { addComment, createComment, selectComments } from '../../../features/comment/commentsSlice';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import CommentsContext from '../../../context/Comments';
 import { toast } from 'react-toastify';
 
@@ -18,25 +18,31 @@ const AuthCommentForm = ({user}) => {
     // const {setComments} = useContext(CommentsContext)
     const {register, handleSubmit, formState: {errors}} = useForm();
     const dispatch = useDispatch();
+    const navigate= useNavigate();
 
     const {comments, isLoading, isSuccess, isError, message} = useSelector(selectComments)
 
     const submit = (formData)=>{
-        // console.log("content", formData)
-        console.log("user in comment", user, "content", formData)
-        // setComments(prev =>{
-        //     const newComment = {
-        //         "userId": {...user},
-        //         content: formData.comment,
-        //         date: Date.now()
-        //     }
-        //     console.log("newComment", newComment);
-        //     return [newComment, ...prev]
-        // })
-        // const newComment= {...user, "content": formData.comment}
-        // dispatch(addComment(newComment))
+        if(!!user){
+            // console.log("content", formData)
+            console.log("user in comment", user, "content", formData)
+            // setComments(prev =>{
+            //     const newComment = {
+            //         "userId": {...user},
+            //         content: formData.comment,
+            //         date: Date.now()
+            //     }
+            //     console.log("newComment", newComment);
+            //     return [newComment, ...prev]
+            // })
+            // const newComment= {...user, "content": formData.comment}
+            // dispatch(addComment(newComment))
 
-        dispatch(createComment({postId, "content": formData.comment}))
+            dispatch(createComment({postId, "content": formData.comment}))
+        }
+        else{
+            navigate("join-to-us");
+        }
     }
 
     useEffect(()=>{
