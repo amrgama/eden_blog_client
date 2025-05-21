@@ -17,11 +17,11 @@ import Slide from './Slide';
 import {MdArrowBackIosNew} from "react-icons/md"
 import { data } from '../../../../assets/data';
 
-const Slider = () => {
+const Slider = ({posts}) => {
 
   SwiperCore.use([Autoplay])
   
-  const renderedSlides = data.map((post, index) => {
+  const renderedSlides = posts?.map((post, index) => {
     return(
       <SwiperSlide key={index}>
         <Slide postData={post} />

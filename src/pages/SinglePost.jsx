@@ -26,29 +26,33 @@ const SinglePost = () => {
     const id = params.id;
     const commentsRef = useRef()
     const dispatch = useDispatch()
-    const {post, isLoading, isSuccess, isError, message, meta} = useSelector(selectPost)
+    let {post, isLoading, isSuccess, isError, message, meta} = useSelector(selectPost)
     const {user: authUser} = useSelector(selectAuth)
     const authorState= useSelector(selectAccount);
     const matches = useMediaQuery("(min-width: 992px)");
+    post = JSON.parse(window.localStorage.getItem("posts"))?.filter(post=> post._id == id)?.[0] || post;
 
     // cash("post", {id,...post}, "session");
-    console.log("idParam>>", id);
+    console.log("idParam>>", id, "post", post);
 
-    commentsRef.current= (Object.keys(post).length)? [...post.comments.values]: [];
+    commentsRef.current= (Object.keys(post?.comments ?? []).length)? [...post?.comments?.values]: [];
     console.log("commentRef in singlePost", commentsRef.current)
     const isFirstRender = useRef(true);
     console.log("isFirstRender.current", isFirstRender.current)
     useEffect(()=>{
+       if(post?.isStatic) return;
         dispatch(getPost(id))
         return ()=> isFirstRender.current = false;
     }, [])
     useEffect(()=>{
+        if(post?.isStatic) return;
         if(isSuccess){
             dispatch(getAccount(post?.author?.userName));
         }
     }, [isSuccess])
 
     useEffect(()=>{
+        if(post?.isStatic) return;
         if(isSuccess && isFirstRender.current){
             console.log("isReader", authUser?.id?.toString() !== post?.author?._id?.toString())
             dispatch(increaseReadings({postId: post?._id, isReader: authUser?.id?.toString() !== post?.author?._id?.toString()}))
@@ -103,7 +107,10 @@ const SinglePost = () => {
                             <>
                                 <UserCard author={post?.author} authUser={authUser}/>
                                 <div className="w-100 d-flex flex-wrap gap-5">
-                                    <MoreFromBloger bloggerId={post?.author._id} />
+                                    {
+                                        !post?.isStatic &&
+                                        <MoreFromBloger bloggerId={post?.author._id} />
+                                    }
                                     <PopularPosts />
                                 </div>
                             </>

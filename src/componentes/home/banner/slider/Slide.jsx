@@ -2,6 +2,7 @@ import React from 'react'
 import {BsEye} from "react-icons/bs"
 import { BASE_URL } from '../../../../api/axios'
 import { combineWithBaseUrl } from '../../../../utils/helper'
+import { Link } from 'react-router-dom'
 
 const Slide = ({postData}) => {
   return (
@@ -15,9 +16,9 @@ const Slide = ({postData}) => {
             })
           }
         </div>
-        <span className='display-4 text-capitalize fw-bolder text-white d-block' style={{maxWidth: "700px"}}>
+        <Link to={`/blog/${postData?._id}`} className='display-4 text-capitalize fw-bolder text-white d-block' style={{maxWidth: "700px"}}>
           {postData?.title}
-        </span>
+        </Link>
         <div className='d-flex align-items-center gap-3 fw-bold text-white'>
           <span className='text-capitalize'>{postData?.date}</span>
           <span className='bg-primary' style={{width: "30px", height: "10px"}}></span>

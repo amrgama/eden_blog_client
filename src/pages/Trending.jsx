@@ -12,14 +12,11 @@ const Trending = () => {
     const matches_lg = useMediaQuery("(min-width: 992px)");
     const matches_sm = useMediaQuery("(min-width: 576px)");
     const style_card= matches_sm? {height: "300px"} : undefined;
-    const {posts}= useSelector(selectPosts);
-    const dispatch= useDispatch();
-    // useEffect(()=>{
-    //     dispatch(getPostsByQuery());
-    // }, [])
+    const posts= JSON.parse(window.localStorage.getItem("posts"));
+    
     console.log("posts", posts);
 
-    const renderedPostCards = data.map((post, i)=>{
+    const renderedPostCards = posts?.map((post, i)=>{
         return <BigCard key={i} postData={post} style={style_card}/>
     })
     return (
@@ -27,16 +24,21 @@ const Trending = () => {
         <BreadCrumb title={"trending"}/>
         <section className='py-5'>
             <div className="container">
-               <div className="row justify-content-between gap-5 m-0">
-                    <div className='col-12 col-lg d-flex flex-column gap-5 p-0 order-2 order-lg-1'>
-                        {renderedPostCards}
-                    </div>
-                    <div className='col position-lg-sticky d-flex flex-column gap-5 p-0 order-1 order-lg-2'
-                    style={{maxWidth: `${matches_lg? "360px": ""}`, height: "fit-content", top: "1.5rem"}}>
-                        <CategoriesLinks label={"Trending Categories"} matchWith={[data[0].category]} />
-                        <TagsLinks label={"Trending Tags"} matchWith={data[0].tags} />
-                    </div>
-                </div>
+                {
+                    !!posts?.length?
+                        <div className="row justify-content-between gap-5 m-0">
+                            <div className='col-12 col-lg d-flex flex-column gap-5 p-0 order-2 order-lg-1'>
+                                {renderedPostCards}
+                            </div>
+                            <div className='col position-lg-sticky d-flex flex-column gap-5 p-0 order-1 order-lg-2'
+                            style={{maxWidth: `${matches_lg? "360px": ""}`, height: "fit-content", top: "1.5rem"}}>
+                                <CategoriesLinks label={"Trending Categories"} matchWith={[data[0].category]} />
+                                <TagsLinks label={"Trending Tags"} matchWith={data[0].tags} />
+                            </div>
+                        </div>
+                    :
+                        <span style={{height: "100px"}} className="d-flex justify-content-center align-items-center text-muted fs-5">There is't trending posts yet!</span>
+                }
             </div>    
         </section>
     </div>

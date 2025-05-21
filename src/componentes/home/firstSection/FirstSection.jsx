@@ -1,12 +1,12 @@
-import React from 'react'
 import Slider from './slider/Slider'
 import SmallCard from '../../postCards/SmallCard'
 // import images from '../../../assets/images'
 import { data } from '../../../assets/data'
 import MainTitle from '../../ui-kits/MainTitle'
 
-const FirstSection = () => {
-    const renderedSmallCards = data.map((post, i)=>{
+const FirstSection = ({posts}) => {
+
+    const renderedSmallCards = posts?.map((post, i)=>{
         return  <SmallCard key={i} postData={post}/>;
     })
   return (
@@ -15,7 +15,7 @@ const FirstSection = () => {
             <MainTitle title={"handpicked posts"} extraClasses={"flex-column flex-sm-row justify-content-center"} />
             <div className="d-flex flex-wrap">
                 <div className="col-12 col-lg-7 pe-lg-3 py-3">
-                    <Slider />
+                    <Slider posts={posts} />
                 </div>
                 <div className="col-12 col-lg-5 ps-lg-3 py-3 d-flex flex-wrap gap-4">
                     {renderedSmallCards}

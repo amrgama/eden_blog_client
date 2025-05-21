@@ -8,11 +8,11 @@ import MainTitle from '../../ui-kits/MainTitle'
 
 const orderes = [1, 2, 4, 5]
 
-const SecondSection = () => {
+const SecondSection = ({posts}) => {
   const matches = useMediaQuery("(min-width: 576px)");
   const style= matches? {height: "330px"} : undefined;
 
-  const renderedPosts = data.map((post, i) =>{    
+  const renderedPosts = posts?.map((post, i) =>{    
     if((orderes[i] % 2) > 0){
       return ( 
         <div key={i} className="col-12 col-lg-7 px-0 px-lg-3 py-3" style={{height: "fit-content"}}>

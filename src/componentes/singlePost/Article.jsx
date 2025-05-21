@@ -7,21 +7,25 @@ import SaveBtn from './SaveBtn'
 // import ShareBtn from './ShareBtn'
 import TimeAgo from './TimeAgo'
 import PostTools from './postTools/PostTools'
-import { EditorState, convertFromRaw } from 'draft-js';
+import { EditorState, convertFromRaw, convertToRaw } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import { combineWithBaseUrl } from '../../utils/helper'
+import draftToHtml from 'draftjs-to-html';
+import { data } from '../../assets/data'
 
 const Article = ({post}) => {
   const params = useParams();
-  const postId = params.id;
   const user = JSON.parse(window.localStorage.getItem("user"))
-  const userId = user?.id;
+  const userId= user?._id;
 
+console.log("post", post.content);
   let rawContent, convertedRawContent;
-  if(post?.content){
+  if(post?._id){
     rawContent = JSON.parse(post?.content);
     convertedRawContent = convertFromRaw(rawContent);
+    
+    // console.log("convertedRawContent", convertedRawContent);
   }
 
   useEffect(()=>{
@@ -32,14 +36,16 @@ const Article = ({post}) => {
     if(textEditor){
       contentEle.setAttribute("class", textEditor.getAttribute("class"));
       contentEle.innerHTML= textEditor.innerHTML;
+      // contentEle.innerHTML= draftToHtml(convertToRaw(JSON.parse(post?.content)));
+      // document.getElementById("content").appendChild(contentEle);
       textEditor.replaceWith(contentEle)
     }
   }, [])
-
+  // console.log("draftToHtml(post?.content)", draftToHtml(convertToRaw(JSON.parse(post?.content))))
   return (
     <article className='d-block w-100 position-relative p-0 bg-white'>
       <img src={combineWithBaseUrl(post?.image)} className='d-block w-100 object-fit-contain' style={{height: "370px", objectPosition: "center"}} alt="..." />
-      <div className='d-flex flex-column gap-3 p-4 text-start'>
+      <div id='content' className='d-flex flex-column gap-3 p-4 text-start'>
         <div className="w-100 d-flex align-items-center justify-content-between gap-3">
           <div className='d-flex flex-wrap gap-1'>
             {
@@ -72,9 +78,8 @@ const Article = ({post}) => {
         className="col-12 col-sm-6 d-flex align-items-center justify-content-center gap-3 position-absolute"
         style={{top: "100%", left: "50%", transform: "translate(-50%, -50%)"}}
         >
-          <LikeBtn postId={postId} userId={userId} reactionList={post?.reactionList}/>
-          <SaveBtn postId={postId} userId={userId} saveList={post?.saveList} />
-          {/* <ShareBtn postId={postId} userId={userId} reactionList={post?.reactionList} /> */}
+          <LikeBtn postId={post?._id} userId={userId} reactionList={post?.reactionList}/>
+          <SaveBtn postId={post?._id} userId={userId} saveList={post?.saveList} />
         </div>
       </div>
     </article>

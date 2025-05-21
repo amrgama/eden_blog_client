@@ -13,33 +13,37 @@ import RequiredAuth from './componentes/RequiredAuth'
 import Account from './pages/account/Account'
 import Trending from './pages/Trending'
 import JoinToUsModal from './componentes/modal/JoinToUsModal'
+import { Suspense } from 'react'
+import PageLoading from './componentes/ui-kits/PageLoading'
 
 
 function App() {
 
   return (
     <div className=''>
-      <Routes>
-        <Route path='/' element={<Layout />}>
-          <Route path='signup' element={<SignUp />}></Route>
-          <Route path='login' element={<LogIn />}></Route>
-          <Route index element={<Home />}></Route>
-          <Route path='latest-new' element={<LatestNew />}></Route>
-          <Route path='trending' element={<Trending />}></Route>
-          <Route path='blog'>
-            <Route index element={<DinamicPage />}></Route>
-            <Route path=':id' element={<SinglePost />}>
-              <Route path='join-to-us' element={<JoinToUsModal />} />
-            </Route>
-          </Route>
-          {/* protected routes */}
-          <Route element={<RequiredAuth />}>
-            <Route path="account/:username" element={<Account />}></Route>
-            <Route path='/write' element={<Write />}></Route>
-            <Route path=':id/edit' element={<Write />}></Route>
-          </Route>
-        </Route>
-      </Routes>
+          <Suspense fallback={<PageLoading />}>
+            <Routes>
+              <Route path='/' element={<Layout />}>
+                  <Route path='signup' element={<SignUp />}></Route>
+                  <Route path='login' element={<LogIn />}></Route>
+                  <Route index element={<Home />}></Route>
+                  <Route path='latest-new' element={<LatestNew />}></Route>
+                  <Route path='trending' element={<Trending />}></Route>
+                  <Route path='blog'>
+                    <Route index element={<DinamicPage />}></Route>
+                    <Route path=':id' element={<SinglePost />}>
+                      <Route path='join-to-us' element={<JoinToUsModal />} />
+                    </Route>
+                  </Route>
+                  {/* protected routes */}
+                  <Route element={<RequiredAuth />}>
+                    <Route path="account/:username" element={<Account />}></Route>
+                    <Route path='/write' element={<Write />}></Route>
+                    <Route path=':id/edit' element={<Write />}></Route>
+                  </Route>
+              </Route>
+            </Routes>
+          </Suspense>
       <ToastContainer />
     </div>
   )

@@ -4,7 +4,13 @@ import Banner from '../componentes/home/banner/Banner'
 import SecondSection from '../componentes/home/secondSection/SecondSection'
 import ThirdSection from '../componentes/home/thirdSection/ThirdSection'
 import { motion, AnimatePresence } from 'framer-motion'
+import { data } from '../assets/data'
 const Home = () => {
+  const posts= JSON.parse(window.localStorage.getItem("posts")) ?? [];
+  console.log("posts>>", posts);
+  // if(!!!JSON.parse(window.localStorage.getItem("posts"))?.length){
+  //   window.localStorage.setItem("posts", JSON.stringify(data));
+  // }
   // const [pageLoading, setPageLoading]= useState(true);
   // window.addEventListener("load", e=> setPageLoading(false))
   // useEffect(()=>{
@@ -13,21 +19,10 @@ const Home = () => {
   // if(pageLoading) return <h1>loading</h1>
   return (
     <div id='home position-relative'>
-      <Banner />
-      <FirstSection />
-      <SecondSection />
-      {/* <ThirdSection /> */}
-      {/* <AnimatePresence mode="await" initial="false">
-        <motion.div
-         initial={{scaleY: 1, transformOrigin: "bottom"}}
-         animate={{scaleY: 0, transformOrigin: "bottom", transitionTimingFunction: "ease-in"}}
-         exit={{scaleY: 1, transformOrigin: "bottom"}}
-         transition={{duration: 0.3, delay: 0.1}}
-          className="overlay w-100 h-100 bg-light position-absolute top-0 start-0"
-          style={{zIndex: 1000000}}
-        >    
-        </motion.div>
-      </AnimatePresence> */}
+      <Banner posts={posts}/>
+      <FirstSection posts={posts?.filter(post=> post?.isHandPicked)}/>
+      <SecondSection posts={posts}/>
+      <ThirdSection posts={posts?.filter(post=> post?.isFeatured)}/>
     </div>
   )
 }

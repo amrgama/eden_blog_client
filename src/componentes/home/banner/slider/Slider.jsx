@@ -17,11 +17,11 @@ import Slide from './Slide';
 import {MdArrowBackIosNew} from "react-icons/md"
 import { data } from '../../../../assets/data';
 
-const Slider = () => {
+const Slider = ({posts}) => {
 
   SwiperCore.use([Autoplay])
 
-  const renderedSlides = data.map((post, index) => {
+  const renderedSlides = posts?.map((post, index) => {
     return(
       <SwiperSlide key={index}>
         <Slide postData={post} />
@@ -50,16 +50,9 @@ const Slider = () => {
       style={{width: "clamp(340px, 80%, 1000px)"}}
 
     >
-        {
-          renderedSlides
-        } 
-        <div className="navigate-buttons w-100 px-3 d-flex align-items-center justify-content-between position-absolute top-50 start-0">
-          {/* <button className='next-ele d-block position-relative p-0'>
-            <MdArrowBackIosNew className='under fw-bolder display-1 text-dark' />
-            <MdArrowBackIosNew className='fw-bolder display-1' />
-          </button>
-          <button className='prev-ele d-block'></button> */}
-        </div>   
+      {
+        renderedSlides
+      }
     </Swiper>
   )
 }

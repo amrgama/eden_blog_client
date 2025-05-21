@@ -1,9 +1,9 @@
-import React from 'react'
 import { data } from '../../../assets/data'
 import MainTitle from '../../ui-kits/MainTitle'
+import NormalCard from '../../postCards/NormalCard'
+const ThirdSection = ({posts}) => {
+ const renderedPosts = posts?.map((post, i) =>{
 
-const ThirdSection = () => {
-  const renderedPosts = data.map((post, i) =>{
     return <div key={i} className="col-12 col-md-6 col-lg-4 px-0 px-md-3 py-3" style={{height: "fit-content"}}>
       <NormalCard key={i} postData={post} />
     </div>

@@ -6,7 +6,7 @@ import { combineWithBaseUrl } from '../../utils/helper'
 const SmallCard = ({postData, extraClasses}) => {
 
   return (
-    <div className={`${extraClasses} small-card d-flex gap-3`}>
+    <div className={`${extraClasses} small-card d-flex h-fit gap-3`}>
       <img src={postData.isStatic? postData.image: combineWithBaseUrl(postData.image)} className='d-inline-block' style={{width: "150px", height:"120px", objectFit:"fill", objectPosition: "center"}} alt="..." />
       <div className="d-flex flex-wrap gap-1">
         <div className='d-flex flex-wrap'>

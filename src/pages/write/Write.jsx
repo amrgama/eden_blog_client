@@ -84,7 +84,7 @@ const Write = () => {
     const [isMatched, setIsMatched] = useState(window.matchMedia("only screen and (max-width: 992px)").matches)
     const dummyFileObj = {"0": {name: "dumyData", type: "image/png"}, length: 1};
     const EmptydummyFileObj = {length: 0};
-
+    // console.log("content>>", watch("content"))
     // if(pageName === "write"){
     //     setCurrentPost({});
     // }
@@ -136,12 +136,12 @@ const Write = () => {
 
         if(isSubmitSuccessful && isSuccess && meta?.action === "create_post"){
             toast.success("Article created successfully")
-            navigate(`/account/${window?.localStorage?.getItem("user")?.userName}`)
+            navigate(`/account/${JSON.parse(window?.localStorage?.getItem("user"))?.userName}`)
         }
         // console.log("isFirstRender.current", isFirstRender.current,"isSuccess: ", isSuccess, "meta.action", meta?.action);
         if(isSubmitSuccessful && isSuccess && meta?.action === "edit_post"){
             toast.success("Article edited successfully");
-            navigate(`/account/${window?.localStorage?.getItem("user")?.userName}`)
+            navigate(`/account/${JSON.parse(window?.localStorage?.getItem("user"))?.userName}`)
         }
 
         // console.log(isError, "action", meta?.action);
@@ -154,6 +154,7 @@ const Write = () => {
     console.log("post_later", currentPost)
     const submit = data => {
         console.log("formData", data);
+        console.log("parsedContent>>", data.content);
         const {desc, ...other}= data;
         if(!!!desc){
             data= other;
@@ -163,6 +164,8 @@ const Write = () => {
             ...data,
             "image": imageUrlRef.current,
             "tags": tagsRef?.current.value.split(","),
+            isFeatured: true,
+            // isHandPicked: true,
             isPrivate: publishRef?.current.value === "private",
         };
 
