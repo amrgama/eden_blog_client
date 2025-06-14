@@ -33,23 +33,26 @@ const LikeBtn = ({postId, userId, reactionList}) => {
         return prev - 1
       })
 
-      setUsers(prev => {
-        if(!active) return [...prev, user]
-        return prev.filter(prevUser => prevUser?._id !== userId)
-      })
+      // setUsers(prev => {
+      //   if(!active) return [...prev, user]
+      //   return prev.filter(prevUser => prevUser?._id !== userId)
+      // })
 
       dispatch(react({postId, userId}))
     }
-    else{
-      navigate("join-to-us");
-    }
+    // else{
+    //   navigate("?modal-name=join-to-us");
+    // }
   }
 
   useEffect(()=>{
     // console.log("count", count)
-    const foundedUser = reactionList?.some(user => user._id === userId)
+    const foundedUser = reactionList?.find(user => {
+      console.log("user", user, "userId", userId);
+      return user._id == userId;
+    })
     setActive(foundedUser)
-    console.log("reactionList",reactionList, "foundedUser", foundedUser)
+    console.log("reactionList",reactionList, "userId", userId, "foundedUser", foundedUser)
 
     setCount( reactionList?.length )
   }, [reactionList])

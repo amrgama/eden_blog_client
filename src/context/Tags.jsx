@@ -5,12 +5,11 @@ const TagsContext = createContext();
 export const TagsContextProvider = ({tagsRef, tagsRefVal, children})=>{
     const initialVal = (tagsRefVal)? tagsRefVal: []  
     const [tags, setTags]= useState([...initialVal]);
-    
+    // console.log("tags", tags);
     return(
         <TagsContext.Provider value={{tags, setTags}}>
             <input 
             name={"tags"}
-            // {...register}
             ref={tagsRef}
             value={tags}
             type="hidden"

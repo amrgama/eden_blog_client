@@ -4,7 +4,7 @@ import withInterceptors from "../../utils/withInterceptors";
 
 export const upload = async(formData)=>{
     const axiosWithInterceptors = await withInterceptors();
-    const response = await axios
+    const response = await axiosWithInterceptors
     .post("/file/upload",formData, {
         headers: {"content-type": "multipart/form-data"}
     })
@@ -31,6 +31,7 @@ export const edit = async({id, ...rest})=>{
 }
 
 export const reactOnPost = async(postId, userId)=>{
+    console.log("postID, userId", postId, userId);
     const axiosWithInterceptors = await withInterceptors();
     const response = await axiosWithInterceptors
     .put(`/post/react?postId=${postId}&userId=${userId}`, JSON.stringify({}), {

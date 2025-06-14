@@ -18,7 +18,7 @@ const SmallCard = ({postData, extraClasses}) => {
         </div>
         <span className="category w-100 fw-bold text-capitalize text-start">\ {postData.category}</span>
         <h3 className='card-title m-0 fs-6 fw-bold text-dark text-start'>
-          <Link to={`/blog/${postData._id}`} className='nav-link'>
+          <Link to={`/blog/${postData._id}`} className='nav-link line-clamp-2'>
             {postData.title}
           </Link>
         </h3>

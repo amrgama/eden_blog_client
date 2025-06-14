@@ -12019,7 +12019,7 @@ footer {
      object-position: center;
 }
 #home .swiper .swiper-slide > div .overlay {
-  background: rgba(96, 87, 87, 0.26);
+  background: rgba(96, 87, 87, 0.36);
 }
 #home .swiper .swiper-slide > div .overlay .user {
   font-family: "Open Sans", sans-serif;
@@ -12435,4 +12435,8 @@ input.form-control:-webkit-autofill {
 .vector:hover > * {
   transition: color 0.2s;
   color: #ff7a7f !important;
+}
+
+.text-muted {
+  color: rgba(33, 37, 41, 0.75);
 }/*# sourceMappingURL=main.css.map */

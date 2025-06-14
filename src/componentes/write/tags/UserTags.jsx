@@ -7,11 +7,12 @@ const UserTags = () => {
 
   const createTag= (e)=>{
       const enterKey = e.key || e.code;
-  
+      const val= e.target.value;
+      console.log("e.target.value", val);
       if(enterKey === "Enter") {
         e.preventDefault()
         e.stopPropagation()
-        setTags(prev => [...prev, e.target.value])
+        setTags(prev => [...prev, val])
         e.target.value= "";
       }
     }

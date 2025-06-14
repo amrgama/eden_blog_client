@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from 'react'
-import { Outlet, useParams } from 'react-router-dom'
+import React, { useEffect, useRef, useState } from 'react'
+import { Outlet, useParams, useSearchParams } from 'react-router-dom'
 // import images from '../assets/images';
 import BreadCrumb from '../componentes/breadCrumb/BreadCrumb';
 import Article from '../componentes/singlePost/Article';
@@ -20,9 +20,12 @@ import PopularPosts from '../componentes/singlePost/aside/PopularPosts';
 import { selectAuth } from '../features/auth/authSlice';
 import useMediaQuery from '../hooks/useMediaQuery';
 import { getAccount, selectAccount } from '../features/account/accountSlice';
+import JoinToUsModal from '../componentes/modal/JoinToUsModal';
 
 const SinglePost = () => {
     const params = useParams();
+    const [searchParams] = useSearchParams();
+    const modalName= "";
     const id = params.id;
     const commentsRef = useRef()
     const dispatch = useDispatch()
@@ -31,7 +34,7 @@ const SinglePost = () => {
     const authorState= useSelector(selectAccount);
     const matches = useMediaQuery("(min-width: 992px)");
     post = JSON.parse(window.localStorage.getItem("posts"))?.filter(post=> post._id == id)?.[0] || post;
-
+    // const [showJoinToUSModal, setShowJoinToUSModal]= useState(searchParams.get("modal-name") == "join-to-us");
     // cash("post", {id,...post}, "session");
     console.log("idParam>>", id, "post", post);
 
@@ -53,7 +56,7 @@ const SinglePost = () => {
 
     useEffect(()=>{
         if(post?.isStatic) return;
-        if(isSuccess && isFirstRender.current){
+        if(isSuccess && isFirstRender.current && authUser?.id != post?.author?._id){
             console.log("isReader", authUser?.id?.toString() !== post?.author?._id?.toString())
             dispatch(increaseReadings({postId: post?._id, isReader: authUser?.id?.toString() !== post?.author?._id?.toString()}))
         }
@@ -63,6 +66,15 @@ const SinglePost = () => {
         }
     }, [isLoading, isSuccess, isError, dispatch])
 
+    useEffect(()=>{
+        window.scrollTo({top: 0, behavior: "smooth"});
+    },[])
+    // useEffect(()=>{
+
+    //     if(searchParams.get("modal-name") == "join-to-us"){
+    //         setShowJoinToUSModal(searchParams.get("modal-name") == "join-to-us");
+    //     }
+    // }, searchParams.get("modal-name"))
     return (
     <div id="singlePost">
         <BreadCrumb title={post?.title} ignor={"posts"}/>
@@ -120,7 +132,7 @@ const SinglePost = () => {
                 </div>
             </div>    
         </section>
-        <Outlet />
+        {/* <JoinToUsModal show={showJoinToUSModal} setshow={setShowJoinToUSModal}/> */}
     </div>
   )
 }

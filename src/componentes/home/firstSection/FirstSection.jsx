@@ -17,7 +17,7 @@ const FirstSection = ({posts}) => {
                 <div className="col-12 col-lg-7 pe-lg-3 py-3">
                     <Slider posts={posts} />
                 </div>
-                <div className="col-12 col-lg-5 ps-lg-3 py-3 d-flex flex-wrap gap-4">
+                <div className="col-12 col-lg-5 ps-lg-3 py-3 d-flex align-content-start flex-wrap gap-4">
                     {renderedSmallCards}
                 </div>
             </div>

@@ -19,7 +19,7 @@ export function generate_unique_username(prefix){
 }
 
 export function isObjEmpty(obj) {
-    return Object.keys(obj).length === 0
+    return Object.keys(obj ?? {}).length === 0
 }
 
 export function cash(key, value, store="localStorage"){

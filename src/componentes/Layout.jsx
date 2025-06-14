@@ -38,6 +38,7 @@ const Layout = () => {
   // const [pageLoading, setPageLoading]= useState(true);
   
   // window.addEventListener("load", e=> setPageLoading(false))
+  
   return (
     <>
       {/* {

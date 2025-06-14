@@ -13,11 +13,12 @@ import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import { combineWithBaseUrl } from '../../utils/helper'
 import draftToHtml from 'draftjs-to-html';
 import { data } from '../../assets/data'
+import RequiredAuth from '../RequiredAuth'
 
 const Article = ({post}) => {
   const params = useParams();
   const user = JSON.parse(window.localStorage.getItem("user"))
-  const userId= user?._id;
+  const userId= user?.id;
 
 console.log("post", post.content);
   let rawContent, convertedRawContent;
@@ -58,13 +59,12 @@ console.log("post", post.content);
             <TimeAgo date={post?.createdAt} />
             <span className='bg-primary' style={{width: "30px", height: "10px"}}></span>
             <span className='d-flex align-items-center'>
-              {post.readings}
+              {post.readings || "0"}
               <BsEye className='ms-1' />
             </span>
-            {
-              !!user &&
+            <RequiredAuth redirectIfNotAuthed={false} returnType='children' action='disable'>
               <PostTools />
-            }
+            </RequiredAuth>
           </div>
         </div>
         <span className="category w-100 fw-bold text-capitalize text-start">\ {post?.category}</span>
@@ -74,13 +74,15 @@ console.log("post", post.content);
         <Editor
           editorState={EditorState.createWithContent(convertedRawContent)}
         />
-        <div 
-        className="col-12 col-sm-6 d-flex align-items-center justify-content-center gap-3 position-absolute"
-        style={{top: "100%", left: "50%", transform: "translate(-50%, -50%)"}}
-        >
-          <LikeBtn postId={post?._id} userId={userId} reactionList={post?.reactionList}/>
-          <SaveBtn postId={post?._id} userId={userId} saveList={post?.saveList} />
-        </div>
+        <RequiredAuth redirectIfNotAuthed={false} returnType='children' action='disable'>
+          <div 
+            className="col-12 col-sm-6 d-flex align-items-center justify-content-center gap-3 position-absolute"
+            style={{top: "100%", left: "50%", transform: "translate(-50%, -50%)"}}
+          >
+            <LikeBtn postId={post?._id} userId={userId} reactionList={post?.reactionList}/>
+            <SaveBtn postId={post?._id} userId={userId} saveList={post?.saveList} />
+          </div>
+        </RequiredAuth>
       </div>
     </article>
   )

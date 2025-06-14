@@ -165,7 +165,7 @@ const Write = () => {
             "image": imageUrlRef.current,
             "tags": tagsRef?.current.value.split(","),
             isFeatured: true,
-            // isHandPicked: true,
+            isHandPicked: true,
             isPrivate: publishRef?.current.value === "private",
         };
 

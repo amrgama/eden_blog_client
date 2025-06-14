@@ -28,9 +28,9 @@ const SaveBtn = ({postId, userId, saveList}) => {
 
       dispatch(savePost(postId))
     }
-    else{
-      navigate("join-to-us")
-    }
+    // else{
+    //   navigate("join-to-us")
+    // }
   }
 
   useEffect(()=>{

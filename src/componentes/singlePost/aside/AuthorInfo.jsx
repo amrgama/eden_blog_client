@@ -38,7 +38,7 @@ const AuthorInfo = ({author, authUser}) => {
                 className="px-4 py-5 d-flex flex-column flex-wrap align-items-center justify-content-center gap-3 bg-white position-relative"
             >
                 <div className='d-flex flex-column align-items-center'>
-                    <span className="fw-bold fs-5 text-primary text-capitalize">{author?.firstName} {author?.lastName}</span>
+                    <Link to={`/account/${author?.userName}`} className="fw-bold fs-5 text-primary text-capitalize">{author?.firstName} {author?.lastName}</Link>
                     {
                         !!author?.userName &&
                         <span className="fs-8 text-secondary">

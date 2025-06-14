@@ -58,7 +58,7 @@ const BigCard = ({postData, type, extraClasses, style}) => {
                     <TimeAgo date={postData.createdAt} />
                     <span className='bg-primary' style={{width: "30px", height: "10px"}}></span>
                     <span className='d-flex align-items-center fw-normal'>
-                        {postData?.readings ?? 0}
+                        {postData?.readings || "0"}
                         <BsEye className='ms-1' />
                     </span>
                 </div>

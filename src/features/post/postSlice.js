@@ -177,7 +177,11 @@ export const deletePost = createAsyncThunk("post/delete",
 async (postId, thunkAPI)=>{
     try{
         console.log("post id", postId)
-        return await postServices.remove(postId);
+        const deletedPost= await postServices.remove(postId);
+        let posts= JSON.parse(window.localStorage.getItem("posts"));
+        posts= posts?.filter(post=> post._id !== postId);
+        window.localStorage.setItem("posts", JSON.stringify(posts));
+        return deletedPost;
     }
     catch(err){
         let message = "";

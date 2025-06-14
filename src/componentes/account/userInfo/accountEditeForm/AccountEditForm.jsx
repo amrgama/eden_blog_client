@@ -306,6 +306,7 @@ const AccountEditForm = () => {
                         value= {redditLabel}
                         activeLink={activeLink}
                         setActiveLink={setActiveLink}
+                        bgColor={"#FF5700"}
                     />
                     {
                         activeLink === redditLabel &&
@@ -327,7 +328,7 @@ const AccountEditForm = () => {
                                         value={value}
                                         errorMsg={errors?.redditLink?.message}
                                         extraClasses={"py-2 m-0"}
-                                        style={{minHeight: "50px", backgroundColor: "#E4405F"}}
+                                        style={{minHeight: "50px", backgroundColor: "#FF5700"}}
                                     />
                                 }}
                             />
@@ -342,6 +343,7 @@ const AccountEditForm = () => {
                         value= {youtubeLabel}
                         activeLink={activeLink}
                         setActiveLink={setActiveLink}
+                        bgColor={"red"}
                     />
                     {
                         activeLink === youtubeLabel &&
@@ -363,7 +365,7 @@ const AccountEditForm = () => {
                                         value={value}
                                         errorMsg={errors?.youtubeLink?.message}
                                         extraClasses={"py-2 m-0"}
-                                        style={{minHeight: "50px", backgroundColor: "#E4405F"}}
+                                        style={{minHeight: "50px", backgroundColor: "red"}}
                                     />
                                 }}
                             />
@@ -415,7 +417,7 @@ const AccountEditForm = () => {
                         value= {facebookLabel}
                         activeLink={activeLink}
                         setActiveLink={setActiveLink}
-                        bgColor={"rgb(99 205 241)"}
+                        bgColor={"#1877F2"}
                     />
                     {
                         activeLink === facebookLabel &&
@@ -437,7 +439,7 @@ const AccountEditForm = () => {
                                         value={value}
                                         errorMsg={errors?.facebookLink?.message}
                                         extraClasses={"py-2 m-0"}
-                                        style={{minHeight: "50px", backgroundColor: "rgb(99 205 241)"}}
+                                        style={{minHeight: "50px", backgroundColor: "#1877F2"}}
                                     />
                                 }}
                             />

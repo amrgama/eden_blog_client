@@ -6,7 +6,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 const Edit = () => {
   const {id: postId} = useParams();
   console.log("id", postId);
-
+  
   return (
     <motion.li 
     initial={{backgroundColor: "rgb(255, 255, 255)", color: "var(--bs-dark)"}}

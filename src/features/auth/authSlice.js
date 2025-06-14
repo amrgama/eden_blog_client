@@ -47,7 +47,7 @@ async(user, thunkAPI)=>{
         console.log("response in login", response)
 
         window.localStorage.setItem("user", JSON.stringify(response))
-        window.localStorage.removeItem("guest");
+        // window.localStorage.removeItem("guest");
         return response;
     }
     catch(err){

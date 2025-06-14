@@ -1,9 +1,9 @@
 import React from 'react'
 import {formatDistanceToNow} from "date-fns"
-const TimeAgo = ({date, extraClasses}) => {
+const TimeAgo = ({date, extraClasses, style}) => {
   const timeAgo = formatDistanceToNow(new Date(date), {addSuffix: false})
   return (
-    <span className={`date text-muted ${extraClasses? extraClasses : ""}`}>{timeAgo}</span>
+    <span className={`date ${extraClasses? extraClasses : ""}`} style={style}>{timeAgo}</span>
   )
 }
 

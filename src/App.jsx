@@ -31,9 +31,7 @@ function App() {
                   <Route path='trending' element={<Trending />}></Route>
                   <Route path='blog'>
                     <Route index element={<DinamicPage />}></Route>
-                    <Route path=':id' element={<SinglePost />}>
-                      <Route path='join-to-us' element={<JoinToUsModal />} />
-                    </Route>
+                    <Route path=':id' element={<SinglePost />}></Route>
                   </Route>
                   {/* protected routes */}
                   <Route element={<RequiredAuth />}>

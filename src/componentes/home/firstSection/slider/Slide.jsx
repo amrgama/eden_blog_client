@@ -2,6 +2,7 @@ import React from 'react'
 import {BsEye} from "react-icons/bs"
 import { BASE_URL } from '../../../../api/axios'
 import { combineWithBaseUrl } from '../../../../utils/helper'
+import TimeAgo from '../../../singlePost/TimeAgo'
 
 const Slide = ({postData}) => {
   return (
@@ -19,9 +20,10 @@ const Slide = ({postData}) => {
           {postData?.title}
         </span>
         <div className='d-flex align-items-center gap-3 fw-bold text-white'>
-          <span className='text-capitalize'>{postData?.date}</span>
+          <TimeAgo date={postData.createdAt} extraClasses={"text-white"} />
+          {/* <span className='text-capitalize'>{postData?.createdAt}</span> */}
           <span className='bg-primary' style={{width: "30px", height: "10px"}}></span>
-          <span>{postData?.readers} <BsEye className='ms-1' /></span>
+          <span>{postData?.readers || "0"} <BsEye className='ms-1' /></span>
         </div>
         <div className="user d-flex align-items-center gap-3">
           <img src={postData?.isStatic? postData?.vector: combineWithBaseUrl(postData?.vector)} className='rounded-circle d-block' style={{maxWidth: "60px", maxHeight: "60px"}} alt="..." />
