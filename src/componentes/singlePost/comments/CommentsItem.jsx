@@ -8,7 +8,7 @@ import { Link, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getMainReplies, selectReplies } from '../../../features/comment/replies/repliesSlice';
 import { toast } from 'react-toastify';
-import Replies from './replies/replies';
+import Replies from './replies/Replies';
 import { combineWithBaseUrl } from '../../../utils/helper';
 
 const CommentsItem = ({comment: {value: {_id: commentId, userId: user, createdAt, content}, numOfMainReplies}}) => {
