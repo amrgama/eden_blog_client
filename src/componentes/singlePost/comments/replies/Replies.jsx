@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { getMainReplies, selectReplies } from '../../../../features/comment/replies/repliesSlice';
-import Reply from "./reply"
+import Reply from "./Reply"
 import { toast } from 'react-toastify';
 import SubReplies from './subReplies/SubReplies';
 import {GiBottomRight3DArrow} from "react-icons/gi";
