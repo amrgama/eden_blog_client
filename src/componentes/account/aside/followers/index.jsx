@@ -4,12 +4,12 @@ import FollowerCard from './FollowerCard'
 import AsideList from '../aside-list/AsideList'
 import AsideListSearch from '../aside-list/AsideListSearch'
 
-const Followers = ({followers}) => {
+const Followers = ({user, followers}) => {
     const [searchResult, setSearchResult]= useState([]);
     const [isEmptyQuery, setIsEmptyQuery]= useState(true);
     const followersRef = useRef(followers);
     console.log("searchResult", searchResult, "isEmptyQuery", isEmptyQuery)
-    if(!!!searchResult.length && isEmptyQuery){
+    if(isEmptyQuery){
         followersRef.current= followers
     }
     else{
@@ -27,7 +27,7 @@ const Followers = ({followers}) => {
 
     return (
         <AsideList title={"Followers"}>
-            <AsideListSearch setIsEmpty={setIsEmptyQuery} getSearchResult={setSearchResult} />
+            <AsideListSearch searchParams={{searchIn: "followers", accountId: user._id}} setIsEmpty={setIsEmptyQuery} getSearchResult={setSearchResult} />
             <div className='overflow-auto' style={{maxHeight: "300px"}}>
                 {
                     (!!followersRef.current.length)?

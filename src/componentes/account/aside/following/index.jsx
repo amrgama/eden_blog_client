@@ -3,12 +3,13 @@ import followerImg from "../../../../assets/images/person_1.jpg.webp"
 import FollowingCard from './FollowingCard'
 import AsideList from '../aside-list/AsideList'
 import AsideListSearch from '../aside-list/AsideListSearch'
+import { useEffect } from 'react'
 
-const Following = ({following}) => {
+const Following = ({user, following}) => {
     const [searchResult, setSearchResult]= useState([]);
     const [isEmptyQuery, setIsEmptyQuery]= useState(true);
-    const followingRef = useRef(following)
-    if(!!!searchResult.length && isEmptyQuery){
+    const followingRef = useRef(following);
+    if(isEmptyQuery){
         followingRef.current= following
     }
     else{
@@ -24,10 +25,13 @@ const Following = ({following}) => {
             </React.Fragment>
         )
     })
+    console.log("isEmpty", isEmptyQuery);
+    // useEffect(()=>{
 
+    // }, [isEmptyQuery]);
   return (
     <AsideList title={"Following"}>
-        <AsideListSearch setIsEmpty={setIsEmptyQuery} getSearchResult={setSearchResult} />
+        <AsideListSearch searchParams={{searchIn: "following", accountId: user._id}} setIsEmpty={setIsEmptyQuery} getSearchResult={setSearchResult} />
         <div className='overflow-auto' style={{maxHeight: "300px"}}>
             {
                 (!!followingRef.current.length)?

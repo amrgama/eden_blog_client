@@ -2,17 +2,25 @@ import React, { useEffect } from 'react'
 import SearchInput from '../../../ui-kits/SearchInput'
 import useFetch from "../../../../hooks/useFetch"
 import { toast } from 'react-toastify';
+import { handleUrlQuery } from '../../../../utils/helper';
 
-const AsideListSearch = ({setIsEmpty, getSearchResult}) => {
+const AsideListSearch = ({baseSearchURL="/user/search", searchParams= {}, setIsEmpty, getSearchResult}) => {
     const {callApi, response, isLoading, isSuccess, isError, errorMsg}= useFetch();
-
+    // searchParams= searchParams ?? {};
+    console.log("baseSearchURL", baseSearchURL)
     function search(query){
+        console.log("searchParams//", searchParams);
+        searchParams.keyword= query;
+    console.log("searchParams", searchParams);
+        const searchURL= handleUrlQuery(baseSearchURL, searchParams);
+        console.log("searchURL", searchURL)
+        // console.log("query>>", query);
         if(!!!query){
             setIsEmpty(true);
         }
         else{
             setIsEmpty(false);
-            callApi(`/user/search?keyword=${query}`)
+            callApi(searchURL)
         }
         // console.log("query: ",query)
     }

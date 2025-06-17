@@ -12,6 +12,7 @@ import Followers from '../../componentes/account/aside/followers'
 import Following from '../../componentes/account/aside/following'
 import SkeletonAsideList from "../../componentes/account/aside/aside-list/SkeletonAsideList"
 import SkeletonUserPosts from '../../componentes/account/userPosts/SkeletonUserPosts'
+import SuggestedAccounts from '../../componentes/account/aside/peopleToFollow'
 
 const Account = () => {
   const {username} = useParams();
@@ -74,8 +75,9 @@ const Account = () => {
             {
               !!Object.keys(account).length &&
               <>
-                <Followers followers={account.followers} />
-                <Following following={account.following} />
+                <Followers user={account} followers={account.followers} />
+                <Following user={account} following={account.following} />
+                <SuggestedAccounts user={account}/>
               </>
             }
           </aside>

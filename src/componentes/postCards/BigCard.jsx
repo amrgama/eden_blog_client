@@ -49,7 +49,7 @@ const BigCard = ({postData, type, extraClasses, style}) => {
                     <Link 
                         // onClick={incReadings} 
                         to={`/blog/${postData._id}`} 
-                        className='nav-link line-clamp-2 text-decoration-underline'
+                        className={`nav-link line-clamp-${type == "horizontal"? 3: 2} text-decoration-underline`}
                     >
                         {postData.title}
                     </Link>

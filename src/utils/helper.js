@@ -67,3 +67,15 @@ export function combineWithBaseUrl(path){
         return path;
     }
 }
+
+export function handleUrlQuery(url, queryParams) {
+    console.log("url", url)
+    const base = 'http://localhost';
+    url = new URL(url, base);
+
+  Object.entries(queryParams).forEach(([key, value]) => {
+    url.searchParams.set(key, value);
+  });
+
+  return url.pathname + url.search;
+}

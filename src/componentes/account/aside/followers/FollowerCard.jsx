@@ -27,9 +27,9 @@ const FollowerCard = ({follower}) => {
                     />
             }
             <div className="col d-flex flex-wrap align-items-center gap-1 text-start">
-                <div className="d-flex flex-column gap-1 me-auto">
+                <div className="d-flex flex-column me-auto">
                     <h5 className='fs-6 fw-500 m-0'>
-                        <Link to={`/account/${follower.userName}`} className={"nav-link w-fit"}>{follower.firstName} {follower.lastName}</Link>
+                        <Link to={`/account/${follower.userName}`} className={"nav-link w-fit p-0"}>{follower.firstName} {follower.lastName}</Link>
                     </h5>
                     <span className='text-muted fs-7 fw-500'>{follower.userName}</span>
                 </div>

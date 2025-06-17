@@ -8,12 +8,12 @@ import { combineWithBaseUrl } from '../../utils/helper'
 const NormalCard = ({postData, extraClasses}) => {
 
   return (
-    <div className={`${extraClasses} normal-card border border-dark box-shadow-sm bg-white p-3 p-md-4`} style={{height: "490px"}}>
+    <div className={`${extraClasses} normal-card d-flex flex-column border border-dark box-shadow-sm bg-white p-3 p-md-4 overflow-hidden`} style={{height: "540px"}}>
         <img src={postData.isStatic? postData.image: combineWithBaseUrl(postData.image)} className='col-12 d-block'
-        style={{maxHeight: "350px"}} alt="..." />
-        <div className='col-12 pt-4 text-start d-flex flex-column gap-3'>
+        style={{minHeight: "200px", maxHeight: "220px"}} alt="..." />
+        <div className='col-12 pt-4 text-start d-flex flex-column gap-2' style={{flex: 1}}>
             <div className='d-flex flex-wrap gap-1' style={{
-                maxHeight: "50px",
+                height: "50px",
                 overflow: "hidden",
             }}>
                 {
@@ -25,7 +25,7 @@ const NormalCard = ({postData, extraClasses}) => {
                 }
             </div>
             <span className="category w-100 fw-bold text-capitalize">\ {postData.category}</span>
-            <h2 className='card-title m-0 fs-4 fw-bold text-dark'>
+            <h2 className='card-title mt-1 mb-0 mx-0 fs-4 fw-bold text-dark'>
                 <Link to={`/blog/${postData._id}`} className='nav-link line-clamp-2'>
                     {postData.title}
                 </Link>
@@ -39,7 +39,7 @@ const NormalCard = ({postData, extraClasses}) => {
                 <span className='bg-primary text-white px-1 fw-bold'>By</span>
                 <span className='d-block text-capitalize fs-6 second-font-family'>{postData.author?.userName}</span>
             </div> 
-            <p className='content text-secondary line-clamp d-lg-none'>{postData.content}</p>           
+            {/* <p className='content text-secondary line-clamp d-lg-none'>{postData.desc?.length > 80? postData.desc?.slice(0, 80) + "..." : postData.desc}</p>            */}
         </div>
     </div>
   )
