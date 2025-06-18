@@ -60,7 +60,9 @@ export function fillWithDash(text){
 }
 
 export function combineWithBaseUrl(path){
-    if(!path?.startsWith("http")){
+    if(!path?.startsWith("http") && !path?.startsWith("https")){
+        console.log("BASE_URL", BASE_URL, "path", path);
+        console.log("MODE", import.meta.env.VITE_MODE)
         if(path?.startsWith("/")) return BASE_URL + path;
         return BASE_URL + "/" + path;
     }else{

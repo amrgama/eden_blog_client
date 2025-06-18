@@ -15,6 +15,7 @@ import { toast } from 'react-toastify';
 import SkeletonBigCard from '../componentes/skeletonLoading/postCards/SkeletonBigCard';
 import useObserver from '../hooks/useObserver';
 import Observed from '../componentes/ui-kits/Observed';
+import MetaTags from '../componentes/ui-kits/MetaTags';
 
 const DinamicPage = () => {
     const dispatch= useDispatch();
@@ -63,6 +64,19 @@ const DinamicPage = () => {
             return <SkeletonBigCard />
         }
     }
+    
+    // Create dynamic meta title and description based on category or tag
+    const metaTitle = category ? 
+        `${category.charAt(0).toUpperCase() + category.slice(1)} - Eden Blog` : 
+        tag ? 
+        `${tag.charAt(0).toUpperCase() + tag.slice(1)} - Eden Blog` : 
+        "Blog Categories - Eden Blog";
+        
+    const metaDescription = category ? 
+        `Explore articles in the ${category} category on Eden Blog.` : 
+        tag ? 
+        `Discover content tagged with ${tag} on Eden Blog.` : 
+        "Browse articles by category on Eden Blog.";
 
     useEffect(()=>{
         if(observedEle.current){
@@ -96,6 +110,13 @@ const DinamicPage = () => {
     }, [isLoading, isSuccess, isError, message])
     return (
         <div id={id}>
+            <MetaTags
+                title={metaTitle}
+                description={metaDescription}
+                keywords={`${category || tag || "categories"}, blog, articles, eden blog`}
+                ogImage="/blog.jpg"
+                ogUrl={import.meta.env.VITE_SITE_URL + `/${id}/${query[id]}`}
+            />
             <BreadCrumb title={`${id} : ${query[id]}`}/>
             <section className='py-5'>
                 <div className="container">

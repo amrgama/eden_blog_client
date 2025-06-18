@@ -22,6 +22,10 @@ import useMediaQuery from '../hooks/useMediaQuery';
 import { getAccount, selectAccount } from '../features/account/accountSlice';
 import JoinToUsModal from '../componentes/modal/JoinToUsModal';
 
+// Add at the top of your imports
+import MetaTags from '../componentes/ui-kits/MetaTags'
+
+// Inside your component, before the return statement
 const SinglePost = () => {
     const params = useParams();
     const [searchParams] = useSearchParams();
@@ -77,6 +81,13 @@ const SinglePost = () => {
     // }, searchParams.get("modal-name"))
     return (
     <div id="singlePost">
+        <MetaTags 
+            title={post?.title || "Blog Post - Eden Blog"}
+            description={post?.desc || "Read this interesting article on Eden Blog"}
+            keywords={post?.tags?.join(", ") || "blog, article"}
+            ogImage={post?.image}
+            ogUrl={import.meta.env.VITE_SITE_URL + `/${post?._id}`}
+        />
         <BreadCrumb title={post?.title} ignor={"posts"}/>
         <section className='py-5'>
             <div className="container">
@@ -134,7 +145,7 @@ const SinglePost = () => {
         </section>
         {/* <JoinToUsModal show={showJoinToUSModal} setshow={setShowJoinToUSModal}/> */}
     </div>
-  )
+    )
 }
 
 export default SinglePost

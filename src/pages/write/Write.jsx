@@ -49,6 +49,9 @@ const yupSchema = yup.object({
 })
 
 
+// Add at the top of your imports
+import MetaTags from '../../componentes/ui-kits/MetaTags'
+
 const Write = () => {
     const {
         handleSubmit,
@@ -176,8 +179,18 @@ const Write = () => {
             edit({id: postId, ...postData})
         }
     }
+    const { id } = useParams();
+    const isEditMode = !!id;
+    
     return (
         <div id="write">
+            <MetaTags 
+                title={isEditMode ? "Edit Post - Eden Blog" : "Create New Post - Eden Blog"}
+                description={isEditMode ? "Edit your existing blog post on Eden Blog." : "Create a new blog post and share your thoughts on Eden Blog."}
+                keywords="write, create post, blog, content creation, eden blog"
+                ogImage="/blog.jpg"
+                ogUrl={isEditMode? import.meta.env.VITE_SITE_URL + "/write" : import.meta.env.VITE_SITE_URL + "/edit"}
+            />
             <BreadCrumb title={pageName}/>
             <section className='py-5'>
                 <div className="container">

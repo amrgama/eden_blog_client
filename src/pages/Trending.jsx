@@ -8,6 +8,9 @@ import useMediaQuery from '../hooks/useMediaQuery';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPostsByQuery, selectPosts } from '../features/posts/postsSlice';
 
+// Add at the top of your imports
+import MetaTags from '../componentes/ui-kits/MetaTags'
+
 const Trending = () => {
     const matches_lg = useMediaQuery("(min-width: 992px)");
     const matches_sm = useMediaQuery("(min-width: 576px)");
@@ -21,6 +24,13 @@ const Trending = () => {
     })
     return (
     <div id="trending">
+        <MetaTags 
+            title="Trending Posts - Eden Blog"
+            description="Discover the most popular and trending articles on Eden Blog."
+            keywords="trending, popular posts, viral content, eden blog"
+            ogImage="/blog.jpg"
+            ogUrl={import.meta.env.VITE_SITE_URL + "/trending"}
+        />
         <BreadCrumb title={"trending"}/>
         <section className='py-5'>
             <div className="container">

@@ -13,6 +13,9 @@ import Observed from '../componentes/ui-kits/Observed';
 import notFoundPosts from "../assets/animations/notFoundPosts.json"
 import Lottie from 'lottie-react';
 
+// Add at the top of your imports
+import MetaTags from '../componentes/ui-kits/MetaTags'
+
 const LatestNew = () => {
     const dispatch= useDispatch();
     const allPosts= useRef([]);
@@ -66,6 +69,13 @@ const LatestNew = () => {
 
     return (
     <div id="LatestNew">
+        <MetaTags 
+            title="Latest News - Eden Blog"
+            description="Stay updated with the newest articles and fresh content on Eden Blog."
+            keywords="latest news, new articles, fresh content, eden blog"
+            ogImage="/blog.jpg"
+            ogUrl={import.meta.env.VITE_SITE_URL + "/latest-new"}
+        />
         <BreadCrumb title={"latest new"}/>
         <section className='py-5'>
             <div className="container">

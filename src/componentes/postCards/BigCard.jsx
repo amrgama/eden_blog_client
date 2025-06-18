@@ -11,7 +11,7 @@ import { combineWithBaseUrl } from '../../utils/helper'
 
 const BigCard = ({postData, type, extraClasses, style}) => {
     const matches = useMediaQuery("(min-width: 576px)");
-
+    console.log("imageURL>>", postData.isStatic? postData.image: combineWithBaseUrl(postData.image), "postData.image", postData.image);
     // const dispatch= useDispatch();
     // const {user}= useSelector(selectAuth)
 
