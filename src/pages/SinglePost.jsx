@@ -24,6 +24,7 @@ import JoinToUsModal from '../componentes/modal/JoinToUsModal';
 
 // Add at the top of your imports
 import MetaTags from '../componentes/ui-kits/MetaTags'
+import { usePosts } from '../context/Posts';
 
 // Inside your component, before the return statement
 const SinglePost = () => {
@@ -37,7 +38,9 @@ const SinglePost = () => {
     const {user: authUser} = useSelector(selectAuth)
     const authorState= useSelector(selectAccount);
     const matches = useMediaQuery("(min-width: 992px)");
-    post = JSON.parse(window.localStorage.getItem("posts"))?.filter(post=> post._id == id)?.[0] || post;
+    const { posts } = usePosts();
+    post = posts?.filter(post=> post._id == id)?.[0] || post;
+    // post = JSON.parse(window.localStorage.getItem("posts"))?.filter(post=> post._id == id)?.[0] || post;
     // const [showJoinToUSModal, setShowJoinToUSModal]= useState(searchParams.get("modal-name") == "join-to-us");
     // cash("post", {id,...post}, "session");
     console.log("idParam>>", id, "post", post);

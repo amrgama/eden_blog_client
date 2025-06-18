@@ -19,7 +19,7 @@ import { data } from '../../../../assets/data';
 
 const Slider = ({posts}) => {
 
-  SwiperCore.use([Autoplay])
+  // SwiperCore.use([Autoplay])
 
   const renderedSlides = posts?.map((post, index) => {
     return(

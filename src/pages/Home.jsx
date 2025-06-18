@@ -6,9 +6,11 @@ import ThirdSection from '../componentes/home/thirdSection/ThirdSection'
 import { motion, AnimatePresence } from 'framer-motion'
 import { data } from '../assets/data'
 import MetaTags from '../componentes/ui-kits/MetaTags'
+import { usePosts } from '../context/Posts'
 
 const Home = () => {
-  const posts= JSON.parse(window.localStorage.getItem("posts")) ?? [];
+  const { posts } = usePosts()
+  // const posts= JSON.parse(window.localStorage.getItem("posts")) ?? [];
   console.log("posts>>", posts);
   // if(!!!JSON.parse(window.localStorage.getItem("posts"))?.length){
   //   window.localStorage.setItem("posts", JSON.stringify(data));

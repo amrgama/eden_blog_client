@@ -10,12 +10,14 @@ import { getPostsByQuery, selectPosts } from '../features/posts/postsSlice';
 
 // Add at the top of your imports
 import MetaTags from '../componentes/ui-kits/MetaTags'
+import { usePosts } from '../context/Posts';
 
 const Trending = () => {
     const matches_lg = useMediaQuery("(min-width: 992px)");
     const matches_sm = useMediaQuery("(min-width: 576px)");
     const style_card= matches_sm? {height: "300px"} : undefined;
-    const posts= JSON.parse(window.localStorage.getItem("posts"));
+    const { posts } = usePosts()
+    // const posts= JSON.parse(window.localStorage.getItem("posts"));
     
     console.log("posts", posts);
 
