@@ -45,7 +45,7 @@ console.log("post", post.content);
   // console.log("draftToHtml(post?.content)", draftToHtml(convertToRaw(JSON.parse(post?.content))))
   return (
     <article className='d-block w-100 position-relative p-0 bg-white'>
-      <img src={combineWithBaseUrl(post?.image)} className='d-block w-100 object-fit-contain' style={{height: "370px", objectPosition: "center"}} alt="..." />
+      <img src={combineWithBaseUrl(post?.image)} className='d-block w-100 object-fit-cover' style={{height: "370px", objectPosition: "center"}} alt={post?.title} />
       <div id='content' className='d-flex flex-column gap-3 p-4 text-start'>
         <div className="w-100 d-flex align-items-center justify-content-between gap-3">
           <div className='d-flex flex-wrap gap-1'>
