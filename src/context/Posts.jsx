@@ -6,6 +6,7 @@ const PostsContext = createContext();
 export const PostsContextProvider = ({ children }) => {
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(true);
+    // const [success, setSuccess] = useState(null);
     const [error, setError] = useState(null);
 
     const fetchPosts = async () => {

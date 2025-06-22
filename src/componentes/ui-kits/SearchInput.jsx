@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { IoSearchOutline } from "react-icons/io5";
-import spinnerLoading from "../../assets/animations/spinner-loading.json"
+// import spinnerLoading from "../../assets/animations/spinner-loading.json"
+import spinner from "../../assets/animations/spinner.json"
 import Lottie from 'lottie-react';
 
 const SearchInput = ({cb, isLoading, label, placeholder, className}) => {
@@ -40,7 +41,7 @@ const SearchInput = ({cb, isLoading, label, placeholder, className}) => {
                 {
                     (isLoading)?
                         <Lottie 
-                            animationData={spinnerLoading} 
+                            animationData={spinner} 
                             loop={true} 
                             className={'d-flex align-items-center m-auto'} 
                             style={{width: "20px", height: "20px"}}

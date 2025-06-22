@@ -15,7 +15,7 @@ import Trending from './pages/Trending'
 import JoinToUsModal from './componentes/modal/JoinToUsModal'
 import { Suspense } from 'react'
 import PageLoading from './componentes/ui-kits/PageLoading'
-
+import { postsLoader } from './utils/helper'
 
 function App() {
 
@@ -23,7 +23,7 @@ function App() {
     <div className=''>
           <Suspense fallback={<PageLoading />}>
             <Routes>
-              <Route path='/' element={<Layout />}>
+              <Route path='/' element={<Layout />} loader={()=> postsLoader()}>
                   <Route path='signup' element={<SignUp />}></Route>
                   <Route path='login' element={<LogIn />}></Route>
                   <Route index element={<Home />}></Route>

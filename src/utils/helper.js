@@ -1,5 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 import { BASE_URL } from '../api/axios';
+import { getPostsByQuery } from '../features/posts/postsServices';
 
 export function generate_uuid() {
     return uuidv4().slice(0, 12);
@@ -81,3 +82,17 @@ export function handleUrlQuery(url, queryParams) {
 
   return url.pathname + url.search;
 }
+
+export const postsLoader = async () => {
+        try {
+            const postsData = await getPostsByQuery({author: "6825c9bcd1afbd4c0ea13e68", limit: 20, skip: 0});
+            if (postsData?.posts) {
+                window.localStorage.setItem("posts", JSON.stringify(postsData.posts));
+            }
+            return postsData.posts;
+        } catch (err) {
+            console.log("err", err);
+           return [];
+        }
+    };
+

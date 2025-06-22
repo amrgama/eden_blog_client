@@ -7,9 +7,15 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { data } from '../assets/data'
 import MetaTags from '../componentes/ui-kits/MetaTags'
 import { usePosts } from '../context/Posts'
+import Loading from '../componentes/Loading'
+import Lottie from 'lottie-react'
+// import { useLoaderData } from 'react-router-dom'
+import spinnerLoading from "../assets/animations/spinner-loading.json"
+import spinner from "../assets/animations/spinner.json"
 
 const Home = () => {
-  const { posts } = usePosts()
+  // const posts = useLoaderData();
+  const { posts, loading } = usePosts()
   // const posts= JSON.parse(window.localStorage.getItem("posts")) ?? [];
   console.log("posts>>", posts);
   // if(!!!JSON.parse(window.localStorage.getItem("posts"))?.length){
@@ -29,10 +35,25 @@ const Home = () => {
         keywords="blog, articles, eden blog, featured posts, trending"
         ogUrl={import.meta.env.VITE_SITE_URL}
       />
-      <Banner posts={posts}/>
-      <FirstSection posts={posts?.filter(post=> post?.isHandPicked)}/>
-      <SecondSection posts={posts}/>
-      <ThirdSection posts={posts?.filter(post=> post?.isFeatured)}/>
+      {
+        loading?
+          <div className="d-flex align-items-center justify-content-center" style={{height: "100svh", width: "100vw"}}>
+            <Lottie 
+              // animationData={spinnerLoading} 
+              animationData={spinner} 
+              loop={true} 
+              className={'d-flex align-items-center m-auto'} 
+              style={{width: "100px", height: "100px"}}
+            />
+          </div>
+        :
+          <>
+            <Banner posts={posts}/>
+            <FirstSection posts={posts?.filter(post=> post?.isHandPicked)}/>
+            <SecondSection posts={posts}/>
+            <ThirdSection posts={posts?.filter(post=> post?.isFeatured)}/>
+          </>
+      }
     </div>
   )
 }

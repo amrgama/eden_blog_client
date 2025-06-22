@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { Outlet, useParams, useSearchParams } from 'react-router-dom'
+import { Outlet, useLoaderData, useParams, useSearchParams } from 'react-router-dom'
 // import images from '../assets/images';
 import BreadCrumb from '../componentes/breadCrumb/BreadCrumb';
 import Article from '../componentes/singlePost/Article';
@@ -38,6 +38,7 @@ const SinglePost = () => {
     const {user: authUser} = useSelector(selectAuth)
     const authorState= useSelector(selectAccount);
     const matches = useMediaQuery("(min-width: 992px)");
+    // const posts = useLoaderData();
     const { posts } = usePosts();
     post = posts?.filter(post=> post._id == id)?.[0] || post;
     // post = JSON.parse(window.localStorage.getItem("posts"))?.filter(post=> post._id == id)?.[0] || post;
