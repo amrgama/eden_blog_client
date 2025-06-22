@@ -44,7 +44,7 @@ const Account = () => {
   // console.log("account rendered")
   return (
     <div id='account' style={{minHeight: "87vh"}}>
-      <div className="container py-4">
+      <div className="container section-pt pb-4">
         <div className="row m-0 m-lg-1" style={{minHeight: "79vh"}}>
           <div className="col-12 col-lg">
             {

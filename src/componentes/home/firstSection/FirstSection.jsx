@@ -10,7 +10,7 @@ const FirstSection = ({posts}) => {
         return  <SmallCard key={i} postData={post}/>;
     })
   return (
-    <section className='py-5'>
+    <section className='section-pt'>
         <div className="container">
             <MainTitle title={"handpicked posts"} extraClasses={"flex-column flex-sm-row justify-content-center"} />
             <div className="d-flex flex-wrap">

@@ -46,7 +46,7 @@ const BreadCrumb = ({title, ignor}) => {
   return (
     <div 
       className='breadcrumb-wrapper lh-base py-3 bg-white border-bottom border-3 border-dark'
-      style={{marginTop: "-0.5rem"}}
+      style={{marginTop: "78px"}}
     >
       <div className='container'>
         <nav aria-label="breadcrumb" className='d-flex flex-column align-items-center lh-lg mb-3'>

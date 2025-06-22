@@ -10,7 +10,7 @@ const ThirdSection = ({posts}) => {
   })
 
   return (
-    <section className='py-5'>
+    <section className='section-pt'>
         <div className="container">
             <MainTitle title={"Featured Blog Post"} extraClasses={"justify-content-center"} />
             <div className='d-flex flex-wrap'>

@@ -8,7 +8,7 @@ const Header = () => {
 
   return (
     <header 
-    className='d-flex align-items-center position-relative' 
+    className='w-100 d-flex align-items-center position-fixed top-0' 
     style={{minHeight: matches_max_lg? "80px": "92px", zIndex: "1000"}}> 
       <Navbar />
     </header> 

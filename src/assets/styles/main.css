@@ -12290,6 +12290,10 @@ input.form-control:-webkit-autofill {
   height: fit-content !important;
 }
 
+.section-pt {
+  padding-top: calc(78px + 3rem);
+}
+
 .box-shadow-sm {
   box-shadow: 0.1rem 0.1rem 0.1rem 0rem black;
 }
@@ -12437,6 +12441,6 @@ input.form-control:-webkit-autofill {
   color: #ff7a7f !important;
 }
 
-.text-muted {
+.date {
   color: rgba(33, 37, 41, 0.75);
 }/*# sourceMappingURL=main.css.map */

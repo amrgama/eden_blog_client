@@ -52,8 +52,8 @@ const Navbar = () => {
     <nav className="navbar w-100 navbar-expand-lg p-0">
       <div className="container">
         <div className="d-flex align-items-center w-100 position-relative">
-          <Link className="navbar-brand" to="/">
-            <img src={images.logo} alt="..." />
+          <Link className="navbar-brand d-flex flex-wrap" style={{maxWidth: "95px"}} to="/">
+            <img src={images.logo} alt="..." className='w-100' />
           </Link>
           {
             matches_lg &&

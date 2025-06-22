@@ -30,7 +30,7 @@ const SecondSection = ({posts}) => {
   })
 
   return (
-    <section className='py-5'>
+    <section className='section-pt'>
         <div className="container">
             <MainTitle title={"trending articles"} extraClasses={"flex-column flex-sm-row"} />
             <div className='d-flex flex-wrap'>
