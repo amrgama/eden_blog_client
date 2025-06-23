@@ -34,7 +34,7 @@ const LatestNew = () => {
         skip: 0,
         limit: 5
     };
-    
+
     if(category){
         query.category= category;
     }
@@ -59,8 +59,6 @@ const LatestNew = () => {
         if(observedEle.current){
           observer.observe(observedEle.current)
         }
-        console.log("infirstRender>> query", query)
-        dispatch(getPostsByQuery(query))
 
         return ()=> {
           if(observedEle.current){
@@ -69,9 +67,16 @@ const LatestNew = () => {
         }
     },[])
 
+    useEffect(()=>{
+        console.log("infirstRender>> query", query)
+        allPosts.current= [];
+        dispatch(getPostsByQuery(query))
+    }, [])
+
     if(isSuccess && !!posts.length){
         allPosts.current= [...allPosts.current, ...posts];
     }
+    
     console.log("allPosts.current", allPosts.current);
     const renderedPostCards = allPosts.current.map((post, i)=>{
         return <BigCard key={i} postData={post} style={style_card}/>
