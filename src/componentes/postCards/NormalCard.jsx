@@ -26,7 +26,7 @@ const NormalCard = ({postData, extraClasses}) => {
             </div>
             <span className="category w-100 fw-bold text-capitalize">\ {postData.category}</span>
             <h2 className='card-title mt-1 mb-0 mx-0 fs-4 fw-bold text-dark'>
-                <Link to={`/blog/${postData._id}`} className='nav-link line-clamp-2'>
+                <Link to={`/posts/${postData._id}`} className='nav-link line-clamp-2'>
                     {postData.title}
                 </Link>
             </h2>

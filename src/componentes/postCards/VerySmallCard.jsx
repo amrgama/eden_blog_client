@@ -10,7 +10,7 @@ const VerySmallCard = ({postData, extraClasses, whiteText=false}) => {
       <div className="d-flex flex-column flex-wrap gap-1">
         <h4 className={`card-title m-0 fs-7 fw-bold ${whiteText? "text-white": "text-dark"} text-start`}>
           <Link 
-            to={`/blog/${postData._id}`} className='nav-link'
+            to={`/posts/${postData._id}`} className='nav-link'
           >
             {postData.title}
           </Link>

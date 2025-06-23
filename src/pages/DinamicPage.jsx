@@ -4,8 +4,6 @@ import { Link, useLocation, useParams, useSearchParams } from 'react-router-dom'
 import BreadCrumb from '../componentes/breadCrumb/BreadCrumb';
 // import Left from '../componentes/left/Left';
 import BigCard from '../componentes/postCards/BigCard';
-// import MainAside from '../componentes/mainAside/MainAside';
-import { data } from '../assets/data';
 import CategoriesLinks from '../componentes/ui-kits/CategoriesLinks';
 import TagsLinks from '../componentes/ui-kits/TagsLinks';
 import useMediaQuery from '../hooks/useMediaQuery';
@@ -24,7 +22,7 @@ const DinamicPage = () => {
     const matches_min_sm = useMediaQuery("(min-width: 576px)");
     const matches_min_lg = useMediaQuery("(min-width: 992px)");
     const isFirstRender= useRef(true);
-    const [postData, setPostData]= useState(!!posts.length? posts : data)
+    const [postData, setPostData]= useState(!!posts.length? posts : [])
     const observedEle = useRef();
     const observer= useObserver(fetchMorePosts);
     const category = searchParams.get("category");
@@ -48,7 +46,7 @@ const DinamicPage = () => {
     
     // console.log("postData", postData);
     const card_style= matches_min_sm? {height: "300px"} : undefined;
-    const renderedPostCards = postData.map((post, i)=>{
+    const renderedPostCards = postData?.map((post, i)=>{
         return <BigCard key={i} postData={post} style={card_style}/>
     })
     
@@ -100,7 +98,7 @@ const DinamicPage = () => {
     useEffect(()=>{
         if(!isFirstRender.current && isSuccess){
             // console.log("inside useEffect", !!posts.length? posts : data);
-            setPostData(prev => !!posts.length? [...prev, ...posts] : [...prev, ...data]);
+            setPostData(prev => [...prev, ...posts]);
         }
         if(!isFirstRender.current && isError && !!message){
             toast.error(message);

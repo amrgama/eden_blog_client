@@ -5,14 +5,13 @@ import { Link } from 'react-router-dom'
 import images from '../../assets/images'
 import VerySmallCard from '../postCards/VerySmallCard'
 import SkeletonVerySmallCard from '../skeletonLoading/postCards/SkeletonVerySmallCard'
-import { data } from '../../assets/data'
 import useMediaQuery from '../../hooks/useMediaQuery'
-import { BASE_URL } from '../../api/axios'
-import { combineWithBaseUrl } from '../../utils/helper'
+import { usePosts } from '../../context/Posts'
 
 const Footer = () => {
+    const {posts}= usePosts();
     const matches_max_768 = useMediaQuery("(max-width: 768px")
-    const renderedPopulerCards= data.map((post, i)=>{
+    const renderedPopulerCards= posts?.slice(0, 5)?.map((post, i)=>{
         return <VerySmallCard key={i} postData={post} />
     })
 
@@ -47,7 +46,7 @@ const Footer = () => {
                 </div>
             </div>
             <div className="col-12 col-sm" style={{minWidth: "300px"}}>
-                <span className='d-block fs-5 fw-bold text-capitalize text-start text-dark mb-3'>popular post</span>
+                <span className='d-block fs-5 fw-bold text-capitalize text-start text-dark mb-3'>popular posts</span>
                 <div className="d-flex flex-column gap-3">
                     {renderedPopulerCards}
                 </div>

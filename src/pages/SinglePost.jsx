@@ -3,7 +3,6 @@ import { Outlet, useLoaderData, useParams, useSearchParams } from 'react-router-
 // import images from '../assets/images';
 import BreadCrumb from '../componentes/breadCrumb/BreadCrumb';
 import Article from '../componentes/singlePost/Article';
-// import { data } from '../assets/data';
 import CreateComment from '../componentes/singlePost/createComment/CreateComment';
 import Comments from '../componentes/singlePost/comments/Comments';
 import { useDispatch, useSelector } from 'react-redux';

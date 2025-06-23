@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import BreadCrumb from '../componentes/breadCrumb/BreadCrumb';
 import BigCard from '../componentes/postCards/BigCard';
-import { data } from '../assets/data';
 import CategoriesLinks from '../componentes/ui-kits/CategoriesLinks';
 import TagsLinks from '../componentes/ui-kits/TagsLinks';
 import useMediaQuery from '../hooks/useMediaQuery';
@@ -12,14 +11,18 @@ import SkeletonBigCard from '../componentes/skeletonLoading/postCards/SkeletonBi
 import Observed from '../componentes/ui-kits/Observed';
 import notFoundPosts from "../assets/animations/notFoundPosts.json"
 import Lottie from 'lottie-react';
-
+import spinner from "../assets/animations/spinner.json";
 // Add at the top of your imports
 import MetaTags from '../componentes/ui-kits/MetaTags'
+import { useSearchParams } from 'react-router-dom';
 
 const LatestNew = () => {
     const dispatch= useDispatch();
     const allPosts= useRef([]);
     const {posts, isLoading, isSuccess, isError, message}= useSelector(selectPosts)
+     const [searchParams, setSearchParams] = useSearchParams();
+    const category = searchParams.get("category");
+    const tag = searchParams.get("tag");
     const observedEle = useRef();
     const observer= useObserver(fetchMorePosts);
 
@@ -27,10 +30,17 @@ const LatestNew = () => {
     const matches_md = useMediaQuery("(min-width: 576px)");
     const style_card= matches_md? {height: "300px"} : undefined;
     const query= {
-        createdAt: {$gte: new Date().setDate(new Date().getDate() - 1)},
+        createdAt: {$gte: new Date().setDate(new Date().getDate() - 6)},
         skip: 0,
         limit: 5
     };
+    
+    if(category){
+        query.category= category;
+    }
+    if(tag){
+        query.category= tag;
+    }
 
     function fetchMorePosts(){
         if(window.innerHeight > observedEle.current.getBoundingClientRect().bottom && !!posts.length){
@@ -83,21 +93,27 @@ const LatestNew = () => {
                     <div className='col-12 col-lg d-flex flex-column gap-5 p-0 order-2 order-lg-1'>
                         {
                             (isLoading && !!!posts.length)?
-                                <>
-                                    <SkeletonBigCard />
-                                    <SkeletonBigCard />
-                                    <SkeletonBigCard />
-                                </>
+                                // <>
+                                //     <SkeletonBigCard />
+                                //     <SkeletonBigCard />
+                                //     <SkeletonBigCard />
+                                // </>
+                                <Lottie
+                                    animationData={spinner} 
+                                    loop={true} 
+                                    className={'d-flex align-items-center m-auto'} 
+                                    style={{width: "100px", height: "400px"}}
+                                />
                             :
                                 (!!allPosts.current.length)?
-                                <>
-                                    {renderedPostCards}
-                                    <Observed reference={observedEle} cb={handleLoadingPosts} />
-                                </>
+                                    <>
+                                        {renderedPostCards}
+                                        <Observed reference={observedEle} cb={handleLoadingPosts} />
+                                    </>
                                 :
-                                    <div className="w-100 d-flex flex-column flex-wrap justify-content-cente align-items-center" style={{height: "520px"}}>
-                                        <Lottie  animationData={notFoundPosts} style={{height: "400px"}}/>
-                                        <span className="fs-4 bold">There are't posts yet.</span>
+                                    <div className="w-100 d-flex flex-column justify-content-cente align-items-center" style={{height: "400px"}}>
+                                        <Lottie  animationData={notFoundPosts} style={{height: "300px"}}/>
+                                        <span className="d-block w-100 fs-4 bold">There are't new posts yet.</span>
                                     </div>
                         }
                     </div>
@@ -105,8 +121,8 @@ const LatestNew = () => {
                         (!!allPosts.current.length) &&
                         <div className='col position-lg-sticky d-flex flex-column gap-5 p-0 order-1 order-lg-2'
                         style={{maxWidth: `${matches_lg? "360px": ""}`, height: "fit-content", top: "1.5rem"}}>
-                            <CategoriesLinks label={"Categories"} matchWith={[data[0].category]} />
-                            <TagsLinks label={"Tags"} matchWith={data[0].tags} />
+                            <CategoriesLinks label={"Categories"} matchWith={[]} />
+                            <TagsLinks label={"Tags"} matchWith={[]} />
                         </div>
                     }
                 </div>

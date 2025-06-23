@@ -5,7 +5,7 @@ import { data } from '../../../assets/data'
 
 const Categories = () => {
     const rederedCategoriesItems = data.map((post, i)=>{
-        return <CategoriesItem key={i} index={i} text={post.category} href={`/blog?category=${post.category}`} />
+        return <CategoriesItem key={i} index={i} text={post.category} href={`/posts?category=${post.category}`} />
     })
 
   return (

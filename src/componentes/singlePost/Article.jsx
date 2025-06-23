@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from 'react'
-// import { data } from '../../assets/data'
 import { useParams } from 'react-router-dom'
 import {BsEye} from "react-icons/bs"
 import LikeBtn from './LikeBtn'
@@ -11,8 +10,6 @@ import { EditorState, convertFromRaw, convertToRaw } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import { combineWithBaseUrl } from '../../utils/helper'
-import draftToHtml from 'draftjs-to-html';
-import { data } from '../../assets/data'
 import RequiredAuth from '../RequiredAuth'
 
 const Article = ({post}) => {

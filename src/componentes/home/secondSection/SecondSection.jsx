@@ -1,8 +1,6 @@
 import React from 'react'
 // import images from '../../../assets/images'
 import BigCard from '../../postCards/BigCard'
-// import NormalCard from '../../postCards/NormalCard'
-import { data } from '../../../assets/data'
 import useMediaQuery from '../../../hooks/useMediaQuery'
 import MainTitle from '../../ui-kits/MainTitle'
 

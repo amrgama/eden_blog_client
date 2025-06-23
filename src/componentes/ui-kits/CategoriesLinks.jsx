@@ -1,14 +1,8 @@
 import React from 'react'
 import LinkButton from './LinkButton'
 import SecondaryTitle from './SecondaryTitle'
+import { categories } from '../../assets/data'
 
-const categories= [
-    "english", 
-    "travel",
-    "technology", 
-    "cooking",
-    "spaces"
-]
 
 const CategoriesLinks = ({label, matchWith}) => {
     // console.log("matchWith", matchWith)
@@ -24,7 +18,7 @@ const CategoriesLinks = ({label, matchWith}) => {
         return(
             <LinkButton
                 key={i}
-                link={`/blog?category=${category}`}
+                link={`?category=${category}`}
                 text={category}
                 isActive={matchedCategory}
                 extraClasses={`strike strike-w-50 text-dark bg-white p-2 ${false? "active strike-w-50": ""}`}

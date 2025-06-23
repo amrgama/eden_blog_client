@@ -11,11 +11,7 @@ import 'swiper/css/scrollbar';
 // import required modules
 import { EffectCreative, Navigation, Pagination, Scrollbar, A11y, Autoplay } from 'swiper/modules';
 import SwiperCore from "swiper"
-// import images
-import images from '../../../../assets/images';
 import Slide from './Slide';
-import {MdArrowBackIosNew} from "react-icons/md"
-import { data } from '../../../../assets/data';
 
 const Slider = ({posts}) => {
 

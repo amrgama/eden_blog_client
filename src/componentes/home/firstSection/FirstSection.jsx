@@ -1,7 +1,6 @@
 import Slider from './slider/Slider'
 import SmallCard from '../../postCards/SmallCard'
 // import images from '../../../assets/images'
-import { data } from '../../../assets/data'
 import MainTitle from '../../ui-kits/MainTitle'
 
 const FirstSection = ({posts}) => {

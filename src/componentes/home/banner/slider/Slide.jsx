@@ -17,7 +17,7 @@ const Slide = ({postData}) => {
             })
           }
         </div>
-        <Link to={`/blog/${postData?._id}`} className='display-5 text-capitalize fw-bolder text-white d-block' style={{maxWidth: "700px"}}>
+        <Link to={`/posts/${postData?._id}`} className='display-5 text-capitalize fw-bolder text-white d-block' style={{maxWidth: "700px"}}>
           {postData?.title}
         </Link>
         <div className='d-flex align-items-center gap-3 fw-bold text-white'>

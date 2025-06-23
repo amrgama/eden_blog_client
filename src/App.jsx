@@ -27,9 +27,13 @@ function App() {
                   <Route path='signup' element={<SignUp />}></Route>
                   <Route path='login' element={<LogIn />}></Route>
                   <Route index element={<Home />}></Route>
-                  <Route path='latest-new' element={<LatestNew />}></Route>
-                  <Route path='trending' element={<Trending />}></Route>
-                  <Route path='blog'>
+                  <Route path='latest-new' element={<LatestNew />}>
+                    {/* <Route path=':id' element={<SinglePost />}></Route> */}
+                  </Route>
+                  <Route path='trending' element={<Trending />}>
+                    {/* <Route path=':id' element={<SinglePost />}></Route> */}
+                  </Route>
+                  <Route path='posts'>
                     <Route index element={<DinamicPage />}></Route>
                     <Route path=':id' element={<SinglePost />}></Route>
                   </Route>

@@ -6,7 +6,7 @@ const tags = ["technology", "travel", "cars", "holiday", "swimming", "animies"];
 
 const TrendingTags = () => {
     const rederedTrendingTagsItems = tags.map((tag, i)=>{
-        return <TrendingTagsItem key={i} text={tag} href={`/blog?tag=${tag}`} />
+        return <TrendingTagsItem key={i} text={tag} href={`/posts?tag=${tag}`} />
     })
 
   return (

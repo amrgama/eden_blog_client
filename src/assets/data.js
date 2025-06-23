@@ -117,3 +117,22 @@ export const data = [
         createdAt: new Date("march 5, 2019"),
     }
   ]
+  export const categories= [
+    "Aquascaping",
+    "Motorsports",
+    "Futurism",
+    "Nature & Travel",
+    "Workplace Culture"
+  ]
+  export const tags= [
+    "aquascaping",
+    "fishbowl",
+    "rally car",
+    "volkswagen",
+    "modern house",
+    "concept home",
+    "forest retreat",
+    "eco-living",
+    "coworking space",
+    "modern workspace"
+  ]

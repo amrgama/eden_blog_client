@@ -1,7 +1,5 @@
 import React, { useEffect } from 'react'
-import images from '../../../assets/images'
 import VerySmallCard from '../../postCards/VerySmallCard'
-import { data } from '../../../assets/data'
 import { useDispatch, useSelector } from 'react-redux'
 import { getMorePosts, selectPosts } from '../../../features/posts/postsSlice'
 import { toast } from 'react-toastify'

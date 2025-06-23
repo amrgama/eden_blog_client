@@ -1,19 +1,7 @@
 import React from 'react'
 import LinkButton from './LinkButton'
 import SecondaryTitle from './SecondaryTitle'
-const tags= [
-    "technology", 
-    "travel",
-    "technology", 
-    "cooking", 
-    "food",
-    "cars",
-    "js",
-    "node.js",
-    "programming",
-    "c#",
-    "php"
-]
+import { tags } from '../../assets/data'
 
 const TagsLinks = ({label, matchWith}) => {
     const rederedTagsItems = tags.map((tag, i)=>{
@@ -28,7 +16,7 @@ const TagsLinks = ({label, matchWith}) => {
         return(
             <LinkButton
                 key={i}
-                link={`/blog?tag=${tag}`}
+                link={`?tag=${tag}`}
                 text={tag}
                 extraClasses={`strike text-dark bg-white p-2 ${matchedTag? "active strike-w-50": ""}`}
             />

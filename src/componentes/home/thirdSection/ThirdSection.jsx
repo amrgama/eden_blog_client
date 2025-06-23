@@ -1,4 +1,3 @@
-import { data } from '../../../assets/data'
 import MainTitle from '../../ui-kits/MainTitle'
 import NormalCard from '../../postCards/NormalCard'
 const ThirdSection = ({posts}) => {

@@ -12272,6 +12272,10 @@ input.form-control:-webkit-autofill {
   outline: none !important;
 }
 
+.fs-6 {
+  font-size: 1rem !important;
+}
+
 .fs-7 {
   font-size: 0.85rem !important;
 }
@@ -12280,6 +12284,19 @@ input.form-control:-webkit-autofill {
   font-size: 0.75rem !important;
 }
 
+@media (min-width: 768px) {
+  .min-md-fs-6 {
+    font-size: 1rem !important;
+  }
+  .min-md-fs-5 {
+    font-size: 1.25rem !important;
+  }
+}
+@media (min-width: 992px) {
+  .min-lg-fs-4 {
+    font-size: 1.5rem !important;
+  }
+}
 .w-fit {
   width: -moz-fit-content !important;
   width: fit-content !important;

@@ -3,8 +3,6 @@ import FirstSection from '../componentes/home/firstSection/FirstSection'
 import Banner from '../componentes/home/banner/Banner'
 import SecondSection from '../componentes/home/secondSection/SecondSection'
 import ThirdSection from '../componentes/home/thirdSection/ThirdSection'
-import { motion, AnimatePresence } from 'framer-motion'
-import { data } from '../assets/data'
 import MetaTags from '../componentes/ui-kits/MetaTags'
 import { usePosts } from '../context/Posts'
 import Loading from '../componentes/Loading'
@@ -37,7 +35,7 @@ const Home = () => {
       />
       {
         loading?
-          <div className="d-flex align-items-center justify-content-center" style={{height: "100svh", width: "100vw"}}>
+          <div className="d-flex align-items-center justify-content-center" style={{height: "100svh", width: "100%"}}>
             <Lottie 
               // animationData={spinnerLoading} 
               animationData={spinner} 
