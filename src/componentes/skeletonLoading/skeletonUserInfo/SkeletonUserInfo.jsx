@@ -1,19 +1,21 @@
 import React from 'react'
 import SkeletonUserSetting from './SkeletonUserSetting'
 import SkeletonImage from '../SkeletonImage'
+import useMediaQuery from '../../../hooks/useMediaQuery';
 
 const SkeletonUserInfo = ({isMyAccount}) => {
+    const matches_min_lg = useMediaQuery("(min-width: 992px)");
   return (
     <section className='user-info'>
         <div className="container p-0 px-lg-2" style={{maxWidth: "800px"}}>
-            <span className='d-block' style={{width: "80px", height:"80px"}}></span>
+            <span className='d-block' style={{width:  matches_min_lg? "80px" : "60px", height: matches_min_lg? "80px" : "60px"}}></span>
             <div className='position-relative'>
                 <div 
                     className="p-2 bg-white rounded-circle border border-2 border-dark box-shadow-sm"
                     style={{position: "absolute", left: "50%", transform: "translateX(-50%)", bottom: "calc(100% - 1.5rem)", zIndex: 1}}
                 >
                     <div
-                        style={{width: "80px", height:"80px"}} 
+                        style={{width:  matches_min_lg? "90px": "80px", height: matches_min_lg? "90px": "80px"}} 
                     >
                         <SkeletonImage extraClasses={"overflow-hidden rounded-circle"} />
                     </div>

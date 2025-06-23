@@ -8,8 +8,10 @@ import FollowButton from './FollowButton'
 import WriteButton from './WriteButton'
 import FollowingButton from './FollowingButton'
 import { BASE_URL } from '../../../api/axios'
+import useMediaQuery from '../../../hooks/useMediaQuery'
 
 const UserInfo = ({account, authUser}) => {
+    const matches_min_lg = useMediaQuery("(min-width: 992px)");
     // const {username} = useParams();
     // const {user: account, isLoading, isSuccess, isError, message} = useSelector(selectAccount)
     // const selectedAuthUser = useSelector(selectAuth)?.user;
@@ -56,7 +58,7 @@ const UserInfo = ({account, authUser}) => {
     return (
         <section className='user-info'>
             <div className="container p-0 px-lg-2" style={{maxWidth: "800px"}}>
-                <span className='d-block' style={{width: "80px", height:"80px"}}></span>
+                <span className='d-block' style={{width:  matches_min_lg? "80px" : "60px", height: matches_min_lg? "80px" : "60px"}}></span>
                 <div className='position-relative'>
                     <div 
                         className="p-2 bg-white rounded-circle border border-2 border-dark box-shadow-sm"
@@ -64,7 +66,7 @@ const UserInfo = ({account, authUser}) => {
                     >
                         {
                             !account.vector &&
-                            <span className="d-flex" style={{width: "80px", height:"80px"}}>
+                            <span className="d-flex" style={{width:  matches_min_lg? "90px": "80px", height: matches_min_lg? "90px": "80px"}}>
                                 <BsPerson className='display-4 m-auto' />
                             </span>
                         }
@@ -74,7 +76,7 @@ const UserInfo = ({account, authUser}) => {
                             <img 
                                 src={combineWithBaseUrl(account?.vector)} 
                                 className='vector rounded-circle' alt="..."
-                                style={{width: "80px", height:"80px"}} 
+                                style={{width: matches_min_lg? "90px": "80px", height: matches_min_lg? "90px": "80px"}} 
                             />
                         }
                     </div>
